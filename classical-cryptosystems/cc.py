@@ -3,6 +3,7 @@
 # This file contains the menu to call and run all the modules in this section.
 
 # TODO
+#  - Figure out multiple file Python programs
 #  - Affine Ciphers, encode and decode, letting the user provide α, β and the 
 #    text (both plain and cipher text). 
 #  - Multi-alphabet cipher (Vigenère Cipher), encode and decode, letting the 
@@ -43,12 +44,12 @@ def main():
         elif cmd == 'x': break                                                   
         else: print( "\nInvalid command, please try again!\n" ) 
 
-def a(): print( "\nYou selected menu option a!\n" )                                  
-def b(): print( "\nYou selected menu option b!\n" )                                  
-def c(): print( "\nYou selected menu option c!\n" )                                  
-def d(): print( "\nYou selected menu option d!\n" )                                  
-def e(): print( "\nYou selected menu option e!\n" )
-def f(): print( "\nYou selected menu option f!\n" )    
+def a(): print("\nYou selected Affine Cipher!\n" )                          
+def b(): print("\nYou selected Vigenère Cipher!\n" )                                  
+def c(): print("\nYou selected Frequency Calculation!\n" )                          
+def d(): print("\nYou selected Affine Cipher Attacks!\n" )                    
+def e(): print("\nYou selected Vigenère Cipher Attack!\n" )
+def f(): print("\nYou selected Extra Module!\n" )    
 
 # For the main() function
 if __name__ == '__main__':                                                       
