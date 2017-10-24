@@ -1,10 +1,9 @@
- 
 class Affine:
     
     """The encode function works on the input string, transforming each letter 
     by multiplying it by alpha and adding beta to it. It handles both uppercase
     and lowercase inputs."""
-    def encode(plaintext, alpha, beta):
+    def encode(self, plaintext, alpha, beta):
         ciphertext = ''
         for letter in plaintext:
             if 65 <= ord(letter) <= 90:
@@ -16,5 +15,5 @@ class Affine:
     
     """decode calculates the decryption function (if possible) and then decrypts
     the string"""
-    def decode(ciphertext, alpha, beta):
+    # def decode(ciphertext, alpha, beta):
         # gmpy -> invert(alpha, beta) 
