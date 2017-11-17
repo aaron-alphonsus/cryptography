@@ -16,10 +16,13 @@ Add original project pdf to outer directory
 
 ## TODO
  - General
+    - Add .idea, pycache to .gitignore
     - Python docstrings -> HTML files
     - Be able to run individual modules through command-line arguments
  - Classical Cryptosystems
  - Basic Number Theory
+    - bnt.md
+       - Write-up about the gcd
  - Data Encryption Standard
  - RSA Algorithm
  - ~~Restructure repo~~
