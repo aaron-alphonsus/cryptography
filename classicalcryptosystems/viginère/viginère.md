@@ -1,6 +1,5 @@
 # Viginère Cipher
 
-
 The Viginère cipher is a variation of the shift cipher. It was thought to be 
 secure in the twentieth century however, there were attacks shown as early as 
 the nineteenth century by Babbage and Kasiski. Friedman developed more methods 
@@ -12,7 +11,9 @@ A vector of chosen key length whose entries are integers from 0 to 25.
 **Encryption Method**  
 The encryption is done by shifting each letter of the plaintext by the each 
 integer in the key. Once we get to the end of the key, we wrap around to the 
-first number.
+first number.  
+**Decryption**  
+Decryption is similar to encryption except we do a backwards shift.
 
 ## Example
 **Key**  
