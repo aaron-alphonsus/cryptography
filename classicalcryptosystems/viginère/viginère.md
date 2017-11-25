@@ -15,14 +15,18 @@ integer in the key. Once we get to the end of the key, we wrap around to the
 first number.
 
 ## Example
-Key: (21, 4, 2, 19, 14, 17) - Corresponds to the word _vector_.
+**Key**  
+(21, 4, 2, 19, 14, 17) - Corresponds to the word _vector_.  
 
-Encryption:
+**Encryption**
 
 |  (plaintext) |  h  |  e  |  r  |  e  |  i  |  s  |  h  |  o  |  w  |  i  |  t  |  w  |  o  |  r  |  k  |  s  |
 |    :----:    |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 |     (key)    | 21  |  4  |  2  | 19  | 14  | 17  | 21  |  4  |  2  | 19  | 14  | 17  | 21  |  4  |  2  | 19  |
 | (ciphertext) |  c  |  i  |  t  |  x  |  w  |  j  |  c  |  s  |  y  |  b  |  h  |  n  |  j  |  v  |  m  |  l  |
+
+## Attack
+Finding key length and key
 
 ## References
  - Trappe, Wade, and Lawrence C. Washington. Introduction to Cryptography: with
