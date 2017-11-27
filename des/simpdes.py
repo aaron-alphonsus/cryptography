@@ -1,5 +1,4 @@
-# TODO: Decryption
-# TODO: Extend to actual character en/de-cryption
+# TODO: Extend to actual character en/de-cryption?
 
 
 def encrypt(message, key, rounds=4):
@@ -28,15 +27,55 @@ def encrypt(message, key, rounds=4):
         prev_l = left
 
         # Calculate new key
-        s = (i-1) % 9
-        e = (i-1) % 9 + 8
-        o = 8 - (min(e,9) - s)
-        k = key[s:e] + key[:o]
+        start = (i-1) % 9
+        end = (i-1) % 9 + 8
+        overflow = 8 - (min(end,9) - start)
+        k = key[start:end] + key[:overflow]
 
         # Calculate new left and right
         left = right
         right = int(prev_l, 2) ^ int(f(right, k), 2)
         right = "{0:06b}".format(right)
+
+    return left + right
+
+
+def decrypt(ciphertext, key, rounds=4):
+    # TODO: Change this
+    """
+    Takes in a 12-bit ciphertext and splits it into two 6-bit ciphertexts
+    left(0) and right(0).
+    The algorithm is calculated as follows (for 'rounds' to 0, decrementing):
+    right(i-1) = left(i)
+    left(i-1) = right(i) xor f(left(i), key(i))
+
+    Example from text
+    >>> decrypt('100110011000', '011001010', 1)
+    '011100100110'
+
+    Testing 4 rounds
+    >>> decrypt('001100010110', '011001010')
+    '011100100110'
+
+    :param ciphertext: 12-bit ciphertext to be decrypted
+    :param key: 9-bit key
+    :param rounds: Number of rounds - defaults to 4
+    :return: Decrypted ciphertext
+    """
+    left, right = ciphertext[0:6], ciphertext[6:12]
+    for i in range(rounds, 0, -1):
+        next_r = right
+
+        # Calculate new key
+        start = (i - 1) % 9
+        end = (i - 1) % 9 + 8
+        overflow = 8 - (min(end, 9) - start)
+        k = key[start:end] + key[:overflow]
+
+        # Calculate new left and right
+        right = left
+        left = int(next_r, 2) ^ int(f(left, k), 2)
+        left = "{0:06b}".format(left)
 
     return left + right
 
