@@ -17,7 +17,7 @@ Decryption is similar to encryption except we do a backwards shift.
 
 ## Example
 **Key**  
-(21, 4, 2, 19, 14, 17) - Corresponds to the word _vector_.  
+(21, 4, 2, 19, 14, 17) - Corresponds to the word '_vector_'.
 
 **Encryption**
 

@@ -1,7 +1,4 @@
-num_alphabets = 26
-
-
-def encode(plaintext, alpha, beta):
+def encode(plaintext, alpha, beta, num_alphabets):
     """
     The encode function works on the input string, transforming each letter by
     multiplying it by alpha and adding beta to it. It handles both uppercase
@@ -10,19 +7,20 @@ def encode(plaintext, alpha, beta):
         python -c 'from affine import encode; print encode("affine", 9, 2)'
 
     Examples from the text
-    >>> encode('affine', 9, 2)
+    >>> encode('affine', 9, 2, 26)
     'cvvwpm'
-    >>> encode('input', 13, 4)
+    >>> encode('input', 13, 4, 26)
     Ciphertext will not have a unique decryption.
     gcd(13, 26) does not equal 1.
 
     Example with upper case characters
-    >>> encode('AFfiNe', 9, 2)
+    >>> encode('AFfiNe', 9, 2, 26)
     'CVvwPm'
 
     :param plaintext: plaintext to be encrypted
     :param alpha: alpha coefficient for the affine cipher
     :param beta: beta coefficient for the affine cipher
+    :param num_alphabets: characters used in our encryption
     :return: encrypted plaintext
     """
     from fractions import gcd
@@ -47,25 +45,26 @@ def encode(plaintext, alpha, beta):
     return cipher_text
 
 
-def decode(cipher_text, alpha, beta):
+def decode(cipher_text, alpha, beta, num_alphabets):
     """
     decode calculates the decryption function (if possible) and then decrypts
     the string.
 
     Examples from the text
-    >>> decode('cvvwpm', 9, 2)
+    >>> decode('cvvwpm', 9, 2, 26)
     'affine'
-    >>> decode('errer', 13, 4)
+    >>> decode('errer', 13, 4, 26)
     Ciphertext does not have a unique decryption.
     gcd(13, 26) does not equal 1.
 
     Example with upper case characters
-    >>> decode('CVvwPm', 9, 2)
+    >>> decode('CVvwPm', 9, 2, 26)
     'AFfiNe'
 
     :param cipher_text: ciphertext to be decrypted
     :param alpha: alpha coefficient for the affine cipher
     :param beta: beta coefficient for the affine cipher
+    :param num_alphabets: characters used in our encryption
     :return: decrypted ciphertext
     """
     # Adding folder containing cryptomath module to the path
