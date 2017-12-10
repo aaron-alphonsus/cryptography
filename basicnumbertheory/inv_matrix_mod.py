@@ -49,7 +49,7 @@ def inv_matrix_mod(m, n):
     # values. Return inv m (mod n)
     for i in range(size):
         for j in range(size):
-            m_inv[i][j] = int(np.around(m_inv[i][j] * inv % 11))
+            m_inv[i][j] = int(np.around(m_inv[i][j] * inv % n))
 
     m_inv = m_inv.astype(int).tolist()
     return m_inv
