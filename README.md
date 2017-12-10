@@ -14,10 +14,12 @@ Something about choice of language - python is easy to use, precision ...
 Something about choice of presentation as a github repo. Popularity, audience 
 etc.
 
+## Libraries Used
+ - numpy
+
 ## TODO
  - General
     - Python docstrings -> HTML files
-    - Be able to run individual modules through command-line commands
  - Classical Cryptosystems
     - Affine
        - Attack
@@ -38,6 +40,8 @@ etc.
        - ~~modinverse~~
           - cryptomath.md
     - Extra Module
+       - ~~inverse matrix mod~~
+       - inv_matrix_mod.md
  - Data Encryption Standard
     - ~~simplified des~~
        - Encrypting actual alphabet?
@@ -53,3 +57,8 @@ etc.
  - ~~Add .idea, pycache to .gitignore~~
  - ~~Add original project pdf to outer directory~~
  - ~~Restructure repo~~
+
+## Next Steps:
+  - Flag for verbose/test output
+  - Additions within modules for better output
+    (e.g. english dictionary implementation in ciphertext only affine attack)

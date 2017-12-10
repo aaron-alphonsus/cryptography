@@ -15,6 +15,8 @@ def gcd(a, b):
     3
     >>> gcd(5, 7)
     1
+    >>> gcd(165, 561)
+    33
 
     :param a: first number
     :param b: second number
@@ -23,7 +25,7 @@ def gcd(a, b):
     if b == 0:
         return a
     else:
-        return gcd(b, a % b)
+        return gcd(abs(b), abs(a % b))
 
 
 def extendedgcd(a, b):
@@ -90,3 +92,66 @@ def findModInverse(a, b):
             return extendedgcd(a, b)[1] + b
         else:
             return extendedgcd(a, b)[1]
+
+
+def is_prime(n, r):
+    """
+
+    >>> is_prime(561, 1)
+    0
+    >>> is_prime(56, 1)
+    0
+    >>> is_prime(2, 1)
+    2
+
+    :param n: Number to be tested
+    :param r: Number of times to run the algorithm
+    :return: 2 if definite prime, 1 if probable prime, 0 if definite composite
+    """
+    # TODO: Add in more rounds
+
+    import random
+
+    # Let n > 1 be an odd integer (eliminate even numbers)
+    if n == 2:
+        return 2
+    if n & 1 == 0:
+        return 0
+
+    # Write n-1 = (2^k)*m with m odd.
+    m = n-1
+    k = 0
+    while m & 1 == 0:
+        m /= 2
+        k += 1
+    # print "(2^" + str(k) + ")*" + str(m)
+
+    # Choose a random integer a with 1 < a < n - 1
+    a = random.randint(2, n-2)                             # end-points included
+    # print "a =", a
+
+    # Compute b(0) = a^m (mod n)
+    b = pow(a, m, n)
+    # print "b =", b
+    # If b(0) = (+-) 1 (mod n) stop and declare n probable prime
+    if b == 1 or b == -1:
+        return 1
+
+    for i in range(k - 2):
+        b = pow(b, 2, n)
+        # print "b(" + str(i+1) + ") = " + str(b)
+        if b == 1:
+            return 0
+        elif b == -1:
+            return 1
+    b = pow(b, 2, n)
+    # print "last b = " + str(b)
+    if not b == -1:
+        return 0
+
+    return 1                                  # TODO: verify if this should be 2
+
+
+def random_prime(b):
+    # WARNING: Not cryptographically secure
+    pass
