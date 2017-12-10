@@ -1,5 +1,8 @@
 def inv_matrix_mod(m, n):
     """
+    Calculates inverse m (mod n). Uses the numpy library to calculate the
+    determinant and adj. matrix.
+
     Textbook example
     >>> m = [[1, 2],
     ...      [3, 4]]
@@ -27,7 +30,8 @@ def inv_matrix_mod(m, n):
 
     :param m: Matrix
     :param n: modulus
-    :return:
+    :return: [] if det(m), n are not relatively prime
+             m (mod n), otherwise
     """
     import numpy as np
     import cryptomath
