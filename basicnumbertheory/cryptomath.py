@@ -96,27 +96,44 @@ def findModInverse(a, b):
 
 def is_prime(n, r):
     """
+    Next Steps: increase number of returned 2s (keep a list of small primes)
 
-    >>> is_prime(561, 1)
+    (1/4)^r chance that n is prime.
+
+    >>> is_prime(561, 10)
     0
     >>> is_prime(56, 1)
     0
     >>> is_prime(2, 1)
     2
+    >>> is_prime(563, 500)
+    1
+    >>> is_prime(1, 7)
+    0
+    >>> is_prime(1, 7)
+    0
+    >>> is_prime(643808006803554439230129854961492699151386107534013432918073439524138264842370630061369715394739134090922937332590384720397133335969549256322620979036686633213903952966175107096769180017646161851573147596390153, 64)
+    1
+    >>> is_prime(743808006803554439230129854961492699151386107534013432918073439524138264842370630061369715394739134090922937332590384720397133335969549256322620979036686633213903952966175107096769180017646161851573147596390153, 64)
+    0
 
     :param n: Number to be tested
     :param r: Number of times to run the algorithm
-    :return: 2 if definite prime, 1 if probable prime, 0 if definite composite
+    :return: 2 if definite prime, 1 if probable prime, 0 if definite non-prime
     """
-    # TODO: Add in more rounds
 
     import random
 
+    if n < 2:
+        return 0
     # Let n > 1 be an odd integer (eliminate even numbers)
     if n == 2:
         return 2
     if n & 1 == 0:
         return 0
+
+    if n == 3:  # Avoids issue with randint(2, 3-2)
+        return 2
 
     # Write n-1 = (2^k)*m with m odd.
     m = n-1
@@ -126,32 +143,71 @@ def is_prime(n, r):
         k += 1
     # print "(2^" + str(k) + ")*" + str(m)
 
-    # Choose a random integer a with 1 < a < n - 1
-    a = random.randint(2, n-2)                             # end-points included
-    # print "a =", a
+    a = []
+    ans = []
+    for trial in range(r):
+        # Choose a random integer a with 1 < a < n - 1
+        rand = random.randrange(2, n - 2)                    # end-points included
+        # while rand in a:
+        #     rand = random.randrange(2, n - 2)
+        a.append(rand)
+        # print "a =", a
 
-    # Compute b(0) = a^m (mod n)
-    b = pow(a, m, n)
-    # print "b =", b
-    # If b(0) = (+-) 1 (mod n) stop and declare n probable prime
-    if b == 1 or b == -1:
-        return 1
-
-    for i in range(k - 2):
-        b = pow(b, 2, n)
-        # print "b(" + str(i+1) + ") = " + str(b)
-        if b == 1:
-            return 0
-        elif b == -1:
-            return 1
-    b = pow(b, 2, n)
-    # print "last b = " + str(b)
-    if not b == -1:
-        return 0
-
-    return 1                                  # TODO: verify if this should be 2
+        # Compute b(0) = a^m (mod n)
+        b = pow(a[trial], m, n)
+        # print "b =", b
+        # If b(0) = (+/-) 1 (mod n) stop and declare n probable prime
+        # Note: -1 (mod n) = n-1 (mod n)
+        if b == 1 or b == n-1:
+            ans.append(1)
+        else:
+            # Calculate sequence of b^2 (mod n) and check whether probable prime
+            for i in range(k - 2):
+                b = pow(b, 2, n)
+                # print "b(" + str(j+1) + ") = " + str(b)
+                if b == 1:
+                    ans.append(0)
+                    break
+                if b == n-1:
+                    ans.append(1)
+                    break
+            else:                           # if for loop doesn't hit the breaks
+                b = pow(b, 2, n)
+                # print "last b = " + str(b)
+                if not b == n-1:
+                    ans.append(0)
+                else:
+                    ans.append(1)
+            if ans[trial] == 0:       # We can quit early because definite non-prime
+                return 0
+    # If you have reached here, you have appended 1 for every r
+    # (i.e. probably prime)
+    return 1
 
 
 def random_prime(b):
+    """
+    # Source: https://langui.sh/2009/03/07/generating-very-large-primes/
+    #  - helped out by adding a max (just in case)
     # WARNING: Not cryptographically secure
-    pass
+
+    usage: random_prime(1024)
+
+    :param b: See returned value
+    :return: Generates random prime between 2^(b+1)-1 and 2^b - 1
+    """
+    import math
+    import random
+    confidence = 64
+
+    r_max = 100 * (math.log(b, 2) + 1)                  # max number of attempts
+    r = r_max
+    while r > 0:
+        n = random.randrange(2**b - 1, 2**(b+1) - 1)
+        # print n
+        r -= 1
+        if is_prime(n, confidence):
+            print n
+            return
+    return "Failure after " + str(r_max) + " tries."
+
