@@ -179,34 +179,28 @@ def is_prime(n, r):
     return 1
 
 
-def random_prime(b):
+def random_prime(b, bound):
     """
-    Source: https://langui.sh/2009/03/07/generating-very-large-primes/
-     - helped out by adding a max (just in case)
-
     WARNING: Not cryptographically secure
-
     TODO: Test output value with some prime testing library
 
-    usage: random_prime(1024)
+    # >>> print(random_prime(1024, 1000))
+    # None
 
     :param b: See returned value
+    :param bound: How many random values would you like to test?
     :return: Generates random prime between 2^(b+1)-1 and 2^b - 1
     """
-    import math
     import random
     confidence = 64
 
-    r_max = 100 * (math.log(b, 2) + 1)                  # max number of attempts
-    r = r_max
-    while r > 0:
-        n = random.randrange(2**b - 1, 2**(b+1) - 1)
-        # print n
-        r -= 1
-        if is_prime(n, confidence):
-            print n
-            return
-    return "Failure after " + str(r_max) + " tries."
+    for i in range(bound):
+        while True:
+            n = random.randrange(2**b - 1, 2**(b+1) - 1)
+            # print n
+            if is_prime(n, confidence):
+                return n
+    return False
 
 
 def factor(n, m):
