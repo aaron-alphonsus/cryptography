@@ -100,7 +100,7 @@ def findModInverse(a, b):
             return extendedgcd(a, b)[1]
 
 
-def is_prime(n, r):
+def is_prime(n, r=64):
     """
     Next Steps: increase number of returned 2s (keep a list of small primes)
 
@@ -255,30 +255,32 @@ def fermat_factor(n):
     """
     import math
 
-    def is_square(x):
-        """
-        Brought to you by:
-            https://stackoverflow.com/questions/2489435/
-            how-could-i-check-if-a-number-is-a-perfect-square
-
-        :param x: Possible perfect square
-        :return: True if perfect square, False otherwise
-        """
-        y = x // 2
-        seen = {y}
-        while y * y != x:
-            y = (y + (x // y)) // 2
-            if y in seen:
-                return False
-            seen.add(y)
-        return True
-
     s = 1
     while not is_square(n + s**2):                    # check for perfect square
         s += 1
     # returning (a+b)(a-b)
     return int(math.sqrt(n + s ** 2)) - s, int(math.sqrt(n + s ** 2)) + s
 
+
+def is_square(x):
+    """
+    Brought to you by:
+        https://stackoverflow.com/questions/2489435/
+        how-could-i-check-if-a-number-is-a-perfect-square
+
+    Helper function for Fermat and for Shanks' square forms
+
+    :param x: Possible perfect square
+    :return: True if perfect square, False otherwise
+    """
+    y = x // 2
+    seen = {y}
+    while y * y != x:
+        y = (y + (x // y)) // 2
+        if y in seen:
+            return False
+        seen.add(y)
+    return True
 
 def pollard_pminus1_factor(n):
     """
