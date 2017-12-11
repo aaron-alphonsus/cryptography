@@ -19,6 +19,8 @@ def gcd(a, b):
     33
     >>> gcd(8, 0)
     8
+    >>> gcd(-1, 8)
+    1
 
     :param a: first number
     :param b: second number
@@ -209,7 +211,7 @@ def factor(n, m):
     poison.
 
     >>> factor(987, 2)
-    (3, 329)
+    (21, 47)
     >>> factor(987, 0)
     (21, 47)
     >>> factor(987, 1)
@@ -221,7 +223,7 @@ def factor(n, m):
     >>> factor(22919906902293153921, 1)
     (21, 1091424138204435901)
     >>> factor(22919906902293153921, 2)
-    (3, 7639968967431051307)
+    (21, 1091424138204435901)
 
     :param n: Composite number to be factored
     :param m: Factorization method to be used
@@ -282,11 +284,13 @@ def pollard_pminus1_factor(n):
     Pollard p-1 implementation from the textbook
 
     >>> pollard_pminus1_factor(562)
-    (281, 2)
+    (2, 281)
     >>> pollard_pminus1_factor(561)
     (3, 187)
     >>> pollard_pminus1_factor(987)
-    (3, 329)
+    (21, 47)
+    >>> pollard_pminus1_factor(128)
+    (8, 16)
 
     :param n: Number to factor
     :return: The factors if it was able to factor, False otherwise
@@ -308,6 +312,8 @@ def pollard_pminus1_factor(n):
         d = gcd(b-1, n)                                    # Let d = gcd(b-1, n)
         if 1 < d < n:              # if 1 < d < n, d is a nontrivial factor of n
             return int(d), int(n/d)
+        else:
+            a += 1
         bound += 1
 
 
