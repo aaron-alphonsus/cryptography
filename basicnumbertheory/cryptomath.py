@@ -114,6 +114,8 @@ def is_prime(n, r):
     0
     >>> is_prime(1, 7)
     0
+    >>> is_prime(105943, 1)
+    1
     >>> is_prime(643808006803554439230129854961492699151386107534013432918073439524138264842370630061369715394739134090922937332590384720397133335969549256322620979036686633213903952966175107096769180017646161851573147596390153, 64)
     1
     >>> is_prime(743808006803554439230129854961492699151386107534013432918073439524138264842370630061369715394739134090922937332590384720397133335969549256322620979036686633213903952966175107096769180017646161851573147596390153, 64)
@@ -146,40 +148,32 @@ def is_prime(n, r):
     # print "(2^" + str(k) + ")*" + str(m)
 
     a = []
-    ans = []
     for trial in range(r):
         # Choose a random integer a with 1 < a < n - 1
-        rand = random.randrange(2, n - 2)                  # end-points included
-        a.append(rand)
+        a = random.randrange(2, n - 2)                     # end-points included
         # print "a =", a
 
         # Compute b(0) = a^m (mod n)
-        b = pow(a[trial], m, n)
+        b = pow(a, m, n)
         # print "b =", b
         # If b(0) = (+/-) 1 (mod n) stop and declare n probable prime
         # Note: -1 (mod n) = n-1 (mod n)
         if b == 1 or b == n-1:
-            ans.append(1)
+            continue
         else:
             # Calculate sequence of b^2 (mod n) and check whether probable prime
             for i in range(k - 2):
                 b = pow(b, 2, n)
                 # print "b(" + str(j+1) + ") = " + str(b)
                 if b == 1:
-                    ans.append(0)
-                    break
+                    return 0
                 if b == n-1:
-                    ans.append(1)
                     break
             else:                           # if for loop doesn't hit the breaks
                 b = pow(b, 2, n)
                 # print "last b = " + str(b)
                 if not b == n-1:
-                    ans.append(0)
-                else:
-                    ans.append(1)
-            if ans[trial] == 0:   # We can quit early because definite non-prime
-                return 0
+                    return 0
     # If you have reached here, you have appended 1 for every r
     # (i.e. probably prime)
     return 1
