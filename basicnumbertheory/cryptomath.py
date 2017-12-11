@@ -83,6 +83,8 @@ def findModInverse(a, b):
     2753
     >>> findModInverse(6, 26)
     -1
+    >>> print(findModInverse(57709, 2634973388367806086651380))
+    2161665340336811304308449
 
     :param a: first number
     :param b: second number
@@ -181,7 +183,7 @@ def is_prime(n, r):
     return 1
 
 
-def random_prime(b, bound):
+def random_prime(b, bound=1000):
     """
     WARNING: Not cryptographically secure
     TODO: Test output value with some prime testing library
@@ -196,12 +198,12 @@ def random_prime(b, bound):
     import random
     confidence = 64
 
-    for i in range(bound):
-        while True:
-            n = random.randrange(2**b - 1, 2**(b+1) - 1)
-            # print n
-            if is_prime(n, confidence):
-                return n
+    while bound > 0:
+        n = random.randrange(2**b - 1, 2**(b+1) - 1)
+        # print n
+        if is_prime(n, confidence):
+            return n
+        bound -= 1
     return False
 
 
@@ -253,30 +255,29 @@ def fermat_factor(n):
     """
     import math
 
+    def is_square(x):
+        """
+        Brought to you by:
+            https://stackoverflow.com/questions/2489435/
+            how-could-i-check-if-a-number-is-a-perfect-square
+
+        :param x: Possible perfect square
+        :return: True if perfect square, False otherwise
+        """
+        y = x // 2
+        seen = {y}
+        while y * y != x:
+            y = (y + (x // y)) // 2
+            if y in seen:
+                return False
+            seen.add(y)
+        return True
+
     s = 1
     while not is_square(n + s**2):                    # check for perfect square
         s += 1
     # returning (a+b)(a-b)
     return int(math.sqrt(n + s ** 2)) - s, int(math.sqrt(n + s ** 2)) + s
-
-
-def is_square(x):
-    """
-    Brought to you by:
-        https://stackoverflow.com/questions/2489435/
-        how-could-i-check-if-a-number-is-a-perfect-square
-
-    :param x: Possible perfect square
-    :return: True if perfect square, False otherwise
-    """
-    y = x // 2
-    seen = {y}
-    while y * y != x:
-        y = (y + (x // y)) // 2
-        if y in seen:
-            return False
-        seen.add(y)
-    return True
 
 
 def pollard_pminus1_factor(n):
@@ -291,6 +292,8 @@ def pollard_pminus1_factor(n):
     (21, 47)
     >>> pollard_pminus1_factor(128)
     (8, 16)
+    >>> pollard_pminus1_factor(15)
+    (3, 5)
 
     :param n: Number to factor
     :return: The factors if it was able to factor, False otherwise
@@ -325,18 +328,25 @@ def pollard_rho_factor(n):
     (11, 47)
     >>> pollard_rho_factor(561)
     (3, 187)
+    >>> pollard_rho_factor(4)
+    (2, 2)
+    >>> pollard_rho_factor(8)
+    (2, 4)
+    >>> pollard_rho_factor(15)
+    (3, 5)
 
     :param n: Composite number to be factored
     :return: Factors of n if factorable, False if cannot be factored
     """
     x, y, d = 2, 2, 1
+    g = lambda a: (a ** 2 + 1) % n
     while d == 1:
-        def g(a): return (a ** 2 + 1) % n
         x = g(x)
         y = g(g(y))
         d = gcd(abs(x-y), n)
     if d == n:
-        return False
+        if not d & 1:
+            return int(2), int(n/2)
     else:
         return int(d), int(n/d)
 
