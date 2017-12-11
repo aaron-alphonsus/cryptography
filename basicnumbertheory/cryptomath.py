@@ -214,16 +214,52 @@ def random_prime(b):
 
 
 def factor(n, m):
+    """
+    We assume that n is a composite number.
+
+    >>> factor(987, 2)
+    (3, 329)
+    >>> factor(987, 0)
+    (21, 47)
+
+    :param n:
+    :param m:
+    :return:
+    """
+    # Fine! If you're going to give me a prime...
+    if is_prime(n, 64):
+        return n, 1
+
     if m == 0:
-        fermat_factor(n)
+        return fermat_factor(n)
     elif m == 1:
-        pollard_rho_factor(n)
+        return pollard_rho_factor(n)
     else:
-        pollard_pminus1_factor(n)
+        return pollard_pminus1_factor(n)
 
 
 def fermat_factor(n):
-    pass
+    import math
+    s = 1
+    while not is_square(n + s**2):
+        s += 1
+    return int(math.sqrt(n + s ** 2)) - s, int(math.sqrt(n + s ** 2)) + s
+
+
+def is_square(x):
+    """
+    Brought to you by:
+        https://stackoverflow.com/questions/2489435/
+        how-could-i-check-if-a-number-is-a-perfect-square
+    """
+    y = x // 2
+    seen = {y}
+    while y * y != x:
+        y = (y + (x // y)) // 2
+        if y in seen:
+            return False
+        seen.add(y)
+    return True
 
 
 def pollard_pminus1_factor(n):
@@ -232,12 +268,10 @@ def pollard_pminus1_factor(n):
 
     >>> pollard_pminus1_factor(562)
     (281, 2)
-    >>> pollard_pminus1_factor(857)
-    False
     >>> pollard_pminus1_factor(561)
     (3, 187)
-    >>> pollard_pminus1_factor(563)
-    False
+    >>> pollard_pminus1_factor(987)
+    (3, 329)
 
     :param n: Number to factor
     :return: The factors if it was able to factor, False otherwise
@@ -251,15 +285,15 @@ def pollard_pminus1_factor(n):
     #       b(j) = b(j-1)^j (mod n) [from j=2 onwards I'm guessing]
     # Then, b(B) = b (mod n). Let d = gcd(b-1, n)
     #   if 1 < d < n, d is a nontrivial factor of n
-    for bound in range(2, 2048):
+    bound = 2
+    while 1:                               # Since we only get composite numbers
         b = a % n
         for j in range(2, bound):
             b = pow(b, j, n)
         d = gcd(b-1, n)
         if 1 < d < n:
             return d, n/d
-
-    return False
+        bound += 1
 
 
 def pollard_rho_factor(n):
