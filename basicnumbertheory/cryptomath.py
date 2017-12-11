@@ -147,9 +147,7 @@ def is_prime(n, r):
     ans = []
     for trial in range(r):
         # Choose a random integer a with 1 < a < n - 1
-        rand = random.randrange(2, n - 2)                    # end-points included
-        # while rand in a:
-        #     rand = random.randrange(2, n - 2)
+        rand = random.randrange(2, n - 2)                  # end-points included
         a.append(rand)
         # print "a =", a
 
@@ -178,7 +176,7 @@ def is_prime(n, r):
                     ans.append(0)
                 else:
                     ans.append(1)
-            if ans[trial] == 0:       # We can quit early because definite non-prime
+            if ans[trial] == 0:   # We can quit early because definite non-prime
                 return 0
     # If you have reached here, you have appended 1 for every r
     # (i.e. probably prime)
@@ -187,9 +185,12 @@ def is_prime(n, r):
 
 def random_prime(b):
     """
-    # Source: https://langui.sh/2009/03/07/generating-very-large-primes/
-    #  - helped out by adding a max (just in case)
-    # WARNING: Not cryptographically secure
+    Source: https://langui.sh/2009/03/07/generating-very-large-primes/
+     - helped out by adding a max (just in case)
+
+    WARNING: Not cryptographically secure
+
+    TODO: Test output value with some prime testing library
 
     usage: random_prime(1024)
 
@@ -210,4 +211,58 @@ def random_prime(b):
             print n
             return
     return "Failure after " + str(r_max) + " tries."
+
+
+def factor(n, m):
+    if m == 0:
+        fermat_factor(n)
+    elif m == 1:
+        pollard_rho_factor(n)
+    else:
+        pollard_pminus1_factor(n)
+
+
+def fermat_factor(n):
+    pass
+
+
+def pollard_pminus1_factor(n):
+    """
+    Pollard p-1 implementation from the textbook
+
+    >>> pollard_pminus1_factor(562)
+    (281, 2)
+    >>> pollard_pminus1_factor(857)
+    False
+    >>> pollard_pminus1_factor(561)
+    (3, 187)
+    >>> pollard_pminus1_factor(563)
+    False
+
+    :param n: Number to factor
+    :return: The factors if it was able to factor, False otherwise
+    """
+    # choose a > 1 (often a=2)
+    a = 2
+
+    # choose bound B
+    # Compute b = a^(B!)(mod n) as follows
+    #   Let b(1) = a (mod n) and
+    #       b(j) = b(j-1)^j (mod n) [from j=2 onwards I'm guessing]
+    # Then, b(B) = b (mod n). Let d = gcd(b-1, n)
+    #   if 1 < d < n, d is a nontrivial factor of n
+    for bound in range(2, 2048):
+        b = a % n
+        for j in range(2, bound):
+            b = pow(b, j, n)
+        d = gcd(b-1, n)
+        if 1 < d < n:
+            return d, n/d
+
+    return False
+
+
+def pollard_rho_factor(n):
+    pass
+
 
