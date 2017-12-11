@@ -9,17 +9,17 @@ def encrypt(message, key, rounds=4):
     left(i) = right(i-1)
     right(i) = left(i-1) xor f(right(i-1), key(i))
     
-    # Example from text
-    # >>> encrypt('011100100110', '011001010', 1)
-    # '100110011000'
+    Example from text
+    >>> encrypt('011100100110', '011001010', 1)
+    '100110011000'
 
     Testing 3 rounds from textbook example for diff cryptanalysis
     >>> encrypt('000111011011', '010011010', 3)
     '000011100101'
 
-    # Testing 4 rounds
-    # >>> encrypt('011100100110', '011001010')
-    # '001100010110'
+    Testing 4 rounds
+    >>> encrypt('011100100110', '011001010')
+    '001100010110'
 
     :param message: 12-bit message to be encrypted
     :param key: 9-bit key
@@ -31,9 +31,9 @@ def encrypt(message, key, rounds=4):
         prev_l = left
 
         # Calculate new key
-        start = (i-1) % 9
-        end = (i-1) % 9 + 8
-        overflow = 8 - (min(end,9) - start)
+        start = (i - 1) % 9
+        end = (i - 1) % 9 + 8
+        overflow = 8 - (min(end, 9) - start)
         k = key[start:end] + key[:overflow]
 
         # Calculate new left and right
@@ -129,12 +129,19 @@ def s_boxes(input1, input2):
     :param input2: Last 4 bits of (expander(r) xor key)
     :return: 6-bit concatenated S-box output
     """
+    return s1_box(input1) + s2_box(input2)
+
+
+def s1_box(s1_input):
     s1 = [['101', '010', '001', '110', '011', '100', '111', '000'],
           ['001', '100', '110', '010', '000', '111', '101', '011']]
-    r1, c1 = int(input1[0]), int(input1[1:4], 2)
+    r1, c1 = int(s1_input[0]), int(s1_input[1:4], 2)
+    return s1[r1][c1]
 
+
+def s2_box(s2_input):
     s2 = [['100', '000', '110', '101', '111', '001', '011', '010'],
           ['101', '011', '000', '111', '110', '010', '001', '100']]
-    r2, c2 = int(input2[0]), int(input2[1:4], 2)
+    r2, c2 = int(s2_input[0]), int(s2_input[1:4], 2)
+    return s2[r2][c2]
 
-    return s1[r1][c1] + s2[r2][c2]
