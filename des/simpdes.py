@@ -9,13 +9,17 @@ def encrypt(message, key, rounds=4):
     left(i) = right(i-1)
     right(i) = left(i-1) xor f(right(i-1), key(i))
     
-    Example from text
-    >>> encrypt('011100100110', '011001010', 1)
-    '100110011000'
-    
-    Testing 4 rounds
-    >>> encrypt('011100100110', '011001010')
-    '001100010110'
+    # Example from text
+    # >>> encrypt('011100100110', '011001010', 1)
+    # '100110011000'
+
+    Testing 3 rounds from textbook example for diff cryptanalysis
+    >>> encrypt('000111011011', '010011010', 3)
+    '000011100101'
+
+    # Testing 4 rounds
+    # >>> encrypt('011100100110', '011001010')
+    # '001100010110'
 
     :param message: 12-bit message to be encrypted
     :param key: 9-bit key
@@ -36,6 +40,7 @@ def encrypt(message, key, rounds=4):
         left = right
         right = int(prev_l, 2) ^ int(f(right, k), 2)
         right = "{0:06b}".format(right)
+        # print left, right, k
 
     return left + right
 
@@ -117,6 +122,8 @@ def expander(r):
 def s_boxes(input1, input2):
     """
     Uses input1 and input2 to index into the two S-boxes
+
+    TODO: split into two functions s1 and s2 to make diff cryptanalysis easy
 
     :param input1: First 4 bits of (expander(r) xor key)
     :param input2: Last 4 bits of (expander(r) xor key)
