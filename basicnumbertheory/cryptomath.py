@@ -17,6 +17,8 @@ def gcd(a, b):
     1
     >>> gcd(165, 561)
     33
+    >>> gcd(8, 0)
+    8
 
     :param a: first number
     :param b: second number
@@ -215,16 +217,27 @@ def random_prime(b):
 
 def factor(n, m):
     """
-    We assume that n is a composite number.
+    We assume that n is a composite number. Use m to pick your factorization
+    poison.
 
     >>> factor(987, 2)
     (3, 329)
     >>> factor(987, 0)
     (21, 47)
+    >>> factor(987, 1)
+    (21, 47)
+    >>> factor(10000, 0)
+    (50, 200)
+    >>> factor(10002, 1)
+    (3, 3334)
+    >>> factor(22919906902293153921, 1)
+    (21, 1091424138204435901)
+    >>> factor(22919906902293153921, 2)
+    (3, 7639968967431051307)
 
-    :param n:
-    :param m:
-    :return:
+    :param n: Composite number to be factored
+    :param m: Factorization method to be used
+    :return: Factors of n
     """
     # Fine! If you're going to give me a prime...
     if is_prime(n, 64):
@@ -239,10 +252,21 @@ def factor(n, m):
 
 
 def fermat_factor(n):
+    """
+    Based on the relation (a^2 - b^2) = (a+b)(a-b)
+    We look for a square (b^2) that we can add to n which will give us a perfect
+    square (a^2).
+    (a^2 - b^2) = n and (a+b)(a-b) = pq
+
+    :param n: Composite number to be factored
+    :return: Factored n
+    """
     import math
+
     s = 1
-    while not is_square(n + s**2):
+    while not is_square(n + s**2):                    # check for perfect square
         s += 1
+    # returning (a+b)(a-b)
     return int(math.sqrt(n + s ** 2)) - s, int(math.sqrt(n + s ** 2)) + s
 
 
@@ -251,6 +275,9 @@ def is_square(x):
     Brought to you by:
         https://stackoverflow.com/questions/2489435/
         how-could-i-check-if-a-number-is-a-perfect-square
+
+    :param x: Possible perfect square
+    :return: True if perfect square, False otherwise
     """
     y = x // 2
     seen = {y}
@@ -280,23 +307,42 @@ def pollard_pminus1_factor(n):
     a = 2
 
     # choose bound B
+    bound = 2
+
     # Compute b = a^(B!)(mod n) as follows
     #   Let b(1) = a (mod n) and
     #       b(j) = b(j-1)^j (mod n) [from j=2 onwards I'm guessing]
-    # Then, b(B) = b (mod n). Let d = gcd(b-1, n)
-    #   if 1 < d < n, d is a nontrivial factor of n
-    bound = 2
+    # Then, b(B) = b (mod n)
     while 1:                               # Since we only get composite numbers
         b = a % n
         for j in range(2, bound):
             b = pow(b, j, n)
-        d = gcd(b-1, n)
-        if 1 < d < n:
-            return d, n/d
+        d = gcd(b-1, n)                                    # Let d = gcd(b-1, n)
+        if 1 < d < n:              # if 1 < d < n, d is a nontrivial factor of n
+            return int(d), int(n/d)
         bound += 1
 
 
 def pollard_rho_factor(n):
-    pass
+    """
+    Source: (modified) Cormen, Leiserson, Rivest, Stein
 
+    >>> pollard_rho_factor(517)
+    (11, 47)
+    >>> pollard_rho_factor(561)
+    (3, 187)
+
+    :param n: Composite number to be factored
+    :return: Factors of n if factorable, False if cannot be factored
+    """
+    x, y, d = 2, 2, 1
+    while d == 1:
+        def g(a): return (a ** 2 + 1) % n
+        x = g(x)
+        y = g(g(y))
+        d = gcd(abs(x-y), n)
+    if d == n:
+        return False
+    else:
+        return int(d), int(n/d)
 
