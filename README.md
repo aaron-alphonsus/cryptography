@@ -33,6 +33,10 @@ to other programmers curious about cryptography. Keeping these things in mind, I
 have striven to document my code well, both with docstrings and examples and
 with markdown pages introducing the algorithms at a higher level.
 
+In describing the algorithms, I borrow heavily from our textbook "Introduction
+to Cryptography: with Coding Theory". I do this to maintain as much accuracy as
+possible.
+
 ### Design
 
 I picked Python 2.7 for the implementation of this project mainly because it's
