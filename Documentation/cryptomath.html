@@ -1,0 +1,181 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module cryptomath</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>cryptomath</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/student/7296837/Documents/csc412-crypto/Cryptography/basicnumbertheory/cryptomath.py">/home/student/7296837/Documents/csc412-crypto/Cryptography/basicnumbertheory/cryptomath.py</a></font></td></tr></table>
+    <p><tt>#&nbsp;All&nbsp;these&nbsp;algorithms&nbsp;expect&nbsp;positive&nbsp;numbers.&nbsp;Providing&nbsp;negative&nbsp;numbers<br>
+#&nbsp;doesn't&nbsp;seem&nbsp;useful&nbsp;right&nbsp;now&nbsp;for&nbsp;my&nbsp;application.&nbsp;If&nbsp;it&nbsp;turns&nbsp;out&nbsp;to&nbsp;be,<br>
+#&nbsp;negative&nbsp;functionality&nbsp;will&nbsp;be&nbsp;added</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-extendedgcd"><strong>extendedgcd</strong></a>(a, b)</dt><dd><tt>Reference:&nbsp;<a href="http://anh.cs.luc.edu/331/notes/xgcd.pdf">http://anh.cs.luc.edu/331/notes/xgcd.pdf</a><br>
+#&nbsp;TODO:&nbsp;Mention&nbsp;this&nbsp;reference&nbsp;in&nbsp;the&nbsp;.md<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;<a href="#-extendedgcd">extendedgcd</a>(26,&nbsp;9)<br>
+(1,&nbsp;-1,&nbsp;3)<br>
+&gt;&gt;&gt;&nbsp;<a href="#-extendedgcd">extendedgcd</a>(9,&nbsp;26)<br>
+(1,&nbsp;3,&nbsp;-1)<br>
+&gt;&gt;&gt;&nbsp;<a href="#-extendedgcd">extendedgcd</a>(26,&nbsp;6)<br>
+(2,&nbsp;1,&nbsp;-4)<br>
+&nbsp;<br>
+:param&nbsp;a:&nbsp;first&nbsp;number<br>
+:param&nbsp;b:&nbsp;second&nbsp;number<br>
+:return:&nbsp;List&nbsp;containing&nbsp;gcd,&nbsp;x,&nbsp;and&nbsp;y:&nbsp;(<a href="#-gcd">gcd</a>(a,b),&nbsp;x,&nbsp;y)</tt></dd></dl>
+ <dl><dt><a name="-factor"><strong>factor</strong></a>(n, m)</dt><dd><tt>We&nbsp;assume&nbsp;that&nbsp;n&nbsp;is&nbsp;a&nbsp;composite&nbsp;number.&nbsp;Use&nbsp;m&nbsp;to&nbsp;pick&nbsp;your&nbsp;factorization<br>
+poison.<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;<a href="#-factor">factor</a>(987,&nbsp;2)<br>
+(21,&nbsp;47)<br>
+&gt;&gt;&gt;&nbsp;<a href="#-factor">factor</a>(987,&nbsp;0)<br>
+(21,&nbsp;47)<br>
+&gt;&gt;&gt;&nbsp;<a href="#-factor">factor</a>(987,&nbsp;1)<br>
+(21,&nbsp;47)<br>
+&gt;&gt;&gt;&nbsp;<a href="#-factor">factor</a>(10000,&nbsp;0)<br>
+(50,&nbsp;200)<br>
+&gt;&gt;&gt;&nbsp;<a href="#-factor">factor</a>(10002,&nbsp;1)<br>
+(3,&nbsp;3334)<br>
+&gt;&gt;&gt;&nbsp;<a href="#-factor">factor</a>(22919906902293153921,&nbsp;1)<br>
+(21,&nbsp;1091424138204435901)<br>
+&gt;&gt;&gt;&nbsp;<a href="#-factor">factor</a>(22919906902293153921,&nbsp;2)<br>
+(21,&nbsp;1091424138204435901)<br>
+&nbsp;<br>
+:param&nbsp;n:&nbsp;Composite&nbsp;number&nbsp;to&nbsp;be&nbsp;factored<br>
+:param&nbsp;m:&nbsp;Factorization&nbsp;method&nbsp;to&nbsp;be&nbsp;used<br>
+:return:&nbsp;Factors&nbsp;of&nbsp;n</tt></dd></dl>
+ <dl><dt><a name="-fermat_factor"><strong>fermat_factor</strong></a>(n)</dt><dd><tt>Based&nbsp;on&nbsp;the&nbsp;relation&nbsp;(a^2&nbsp;-&nbsp;b^2)&nbsp;=&nbsp;(a+b)(a-b)<br>
+We&nbsp;look&nbsp;for&nbsp;a&nbsp;square&nbsp;(b^2)&nbsp;that&nbsp;we&nbsp;can&nbsp;add&nbsp;to&nbsp;n&nbsp;which&nbsp;will&nbsp;give&nbsp;us&nbsp;a&nbsp;perfect<br>
+square&nbsp;(a^2).<br>
+(a^2&nbsp;-&nbsp;b^2)&nbsp;=&nbsp;n&nbsp;and&nbsp;(a+b)(a-b)&nbsp;=&nbsp;pq<br>
+&nbsp;<br>
+:param&nbsp;n:&nbsp;Composite&nbsp;number&nbsp;to&nbsp;be&nbsp;factored<br>
+:return:&nbsp;Factored&nbsp;n</tt></dd></dl>
+ <dl><dt><a name="-findModInverse"><strong>findModInverse</strong></a>(a, b)</dt><dd><tt>Does&nbsp;the&nbsp;extended&nbsp;gcd&nbsp;algorithm&nbsp;and&nbsp;checks&nbsp;the&nbsp;gcd.&nbsp;If&nbsp;the&nbsp;gcd&nbsp;is&nbsp;1,&nbsp;the<br>
+smallest&nbsp;positive&nbsp;modular&nbsp;inverse&nbsp;is&nbsp;returned.&nbsp;If&nbsp;gcd&nbsp;is&nbsp;not&nbsp;1,&nbsp;the<br>
+modular&nbsp;inverse&nbsp;doesn't&nbsp;exist&nbsp;and&nbsp;-1&nbsp;is&nbsp;returned&nbsp;(valid&nbsp;since&nbsp;we&nbsp;return&nbsp;the<br>
+smallest&nbsp;positive&nbsp;modular&nbsp;inverse&nbsp;otherwise)<br>
+&nbsp;<br>
+Testing&nbsp;the&nbsp;normal&nbsp;case<br>
+&gt;&gt;&gt;&nbsp;<a href="#-findModInverse">findModInverse</a>(9,&nbsp;26)<br>
+3<br>
+&gt;&gt;&gt;&nbsp;<a href="#-findModInverse">findModInverse</a>(26,&nbsp;9)<br>
+8<br>
+&gt;&gt;&gt;&nbsp;<a href="#-findModInverse">findModInverse</a>(17,&nbsp;3120)<br>
+2753<br>
+&gt;&gt;&gt;&nbsp;<a href="#-findModInverse">findModInverse</a>(6,&nbsp;26)<br>
+-1<br>
+&gt;&gt;&gt;&nbsp;print(<a href="#-findModInverse">findModInverse</a>(57709,&nbsp;2634973388367806086651380))<br>
+2161665340336811304308449<br>
+&nbsp;<br>
+:param&nbsp;a:&nbsp;first&nbsp;number<br>
+:param&nbsp;b:&nbsp;second&nbsp;number<br>
+:return:&nbsp;Smallest&nbsp;positive&nbsp;mod&nbsp;inverse&nbsp;of&nbsp;a&nbsp;and&nbsp;b.&nbsp;-1&nbsp;if&nbsp;it&nbsp;doesn't&nbsp;exist</tt></dd></dl>
+ <dl><dt><a name="-gcd"><strong>gcd</strong></a>(a, b)</dt><dd><tt>Source:&nbsp;Introduction&nbsp;to&nbsp;Algorithms&nbsp;-&nbsp;Cormen,&nbsp;Leiserson,&nbsp;Rivest,&nbsp;Stein<br>
+Calculates&nbsp;the&nbsp;greatest&nbsp;common&nbsp;divisor&nbsp;of&nbsp;a&nbsp;and&nbsp;b&nbsp;(i.e.&nbsp;the&nbsp;largest&nbsp;positive<br>
+integer&nbsp;that&nbsp;divides&nbsp;both&nbsp;numbers)<br>
+&nbsp;<br>
+Examples:<br>
+&gt;&gt;&gt;&nbsp;<a href="#-gcd">gcd</a>(69,&nbsp;3)<br>
+3<br>
+&gt;&gt;&gt;&nbsp;<a href="#-gcd">gcd</a>(-69,&nbsp;-3)<br>
+3<br>
+&gt;&gt;&gt;&nbsp;<a href="#-gcd">gcd</a>(3,&nbsp;69)<br>
+3<br>
+&gt;&gt;&gt;&nbsp;<a href="#-gcd">gcd</a>(5,&nbsp;7)<br>
+1<br>
+&gt;&gt;&gt;&nbsp;<a href="#-gcd">gcd</a>(165,&nbsp;561)<br>
+33<br>
+&gt;&gt;&gt;&nbsp;<a href="#-gcd">gcd</a>(8,&nbsp;0)<br>
+8<br>
+&gt;&gt;&gt;&nbsp;<a href="#-gcd">gcd</a>(-1,&nbsp;8)<br>
+1<br>
+&nbsp;<br>
+:param&nbsp;a:&nbsp;first&nbsp;number<br>
+:param&nbsp;b:&nbsp;second&nbsp;number<br>
+:return:&nbsp;greatest&nbsp;common&nbsp;divisor&nbsp;of&nbsp;a&nbsp;and&nbsp;b</tt></dd></dl>
+ <dl><dt><a name="-is_prime"><strong>is_prime</strong></a>(n, r<font color="#909090">=64</font>)</dt><dd><tt>Next&nbsp;Steps:&nbsp;increase&nbsp;number&nbsp;of&nbsp;returned&nbsp;2s&nbsp;(keep&nbsp;a&nbsp;list&nbsp;of&nbsp;small&nbsp;primes)<br>
+&nbsp;<br>
+Uses&nbsp;the&nbsp;Miller-Rabin&nbsp;primality&nbsp;test&nbsp;which&nbsp;gives&nbsp;a&nbsp;(1/4)^r&nbsp;chance&nbsp;that&nbsp;n&nbsp;is<br>
+prime.&nbsp;(Miller-Rabin&nbsp;is&nbsp;probabilistic)<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;<a href="#-is_prime">is_prime</a>(561,&nbsp;10)<br>
+0<br>
+&gt;&gt;&gt;&nbsp;<a href="#-is_prime">is_prime</a>(56,&nbsp;1)<br>
+0<br>
+&gt;&gt;&gt;&nbsp;<a href="#-is_prime">is_prime</a>(2,&nbsp;1)<br>
+2<br>
+&gt;&gt;&gt;&nbsp;<a href="#-is_prime">is_prime</a>(563,&nbsp;500)<br>
+1<br>
+&gt;&gt;&gt;&nbsp;<a href="#-is_prime">is_prime</a>(1,&nbsp;7)<br>
+0<br>
+&gt;&gt;&gt;&nbsp;<a href="#-is_prime">is_prime</a>(1,&nbsp;7)<br>
+0<br>
+&gt;&gt;&gt;&nbsp;<a href="#-is_prime">is_prime</a>(105943,&nbsp;1)<br>
+1<br>
+&gt;&gt;&gt;&nbsp;<a href="#-is_prime">is_prime</a>(643808006803554439230129854961492699151386107534013432918073439524138264842370630061369715394739134090922937332590384720397133335969549256322620979036686633213903952966175107096769180017646161851573147596390153,&nbsp;64)<br>
+1<br>
+&gt;&gt;&gt;&nbsp;<a href="#-is_prime">is_prime</a>(743808006803554439230129854961492699151386107534013432918073439524138264842370630061369715394739134090922937332590384720397133335969549256322620979036686633213903952966175107096769180017646161851573147596390153,&nbsp;64)<br>
+0<br>
+&nbsp;<br>
+:param&nbsp;n:&nbsp;Number&nbsp;to&nbsp;be&nbsp;tested<br>
+:param&nbsp;r:&nbsp;Number&nbsp;of&nbsp;times&nbsp;to&nbsp;run&nbsp;the&nbsp;algorithm<br>
+:return:&nbsp;2&nbsp;if&nbsp;definite&nbsp;prime,&nbsp;1&nbsp;if&nbsp;probable&nbsp;prime,&nbsp;0&nbsp;if&nbsp;definite&nbsp;non-prime</tt></dd></dl>
+ <dl><dt><a name="-is_square"><strong>is_square</strong></a>(x)</dt><dd><tt>Brought&nbsp;to&nbsp;you&nbsp;by:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;https://stackoverflow.com/questions/2489435/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;how-could-i-check-if-a-number-is-a-perfect-square<br>
+&nbsp;<br>
+Helper&nbsp;function&nbsp;for&nbsp;Fermat&nbsp;and&nbsp;for&nbsp;Shanks'&nbsp;square&nbsp;forms<br>
+&nbsp;<br>
+:param&nbsp;x:&nbsp;Possible&nbsp;perfect&nbsp;square<br>
+:return:&nbsp;True&nbsp;if&nbsp;perfect&nbsp;square,&nbsp;False&nbsp;otherwise</tt></dd></dl>
+ <dl><dt><a name="-pollard_pminus1_factor"><strong>pollard_pminus1_factor</strong></a>(n)</dt><dd><tt>Pollard&nbsp;p-1&nbsp;implementation&nbsp;from&nbsp;the&nbsp;textbook<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;<a href="#-pollard_pminus1_factor">pollard_pminus1_factor</a>(562)<br>
+(2,&nbsp;281)<br>
+&gt;&gt;&gt;&nbsp;<a href="#-pollard_pminus1_factor">pollard_pminus1_factor</a>(561)<br>
+(3,&nbsp;187)<br>
+&gt;&gt;&gt;&nbsp;<a href="#-pollard_pminus1_factor">pollard_pminus1_factor</a>(987)<br>
+(21,&nbsp;47)<br>
+&gt;&gt;&gt;&nbsp;<a href="#-pollard_pminus1_factor">pollard_pminus1_factor</a>(128)<br>
+(8,&nbsp;16)<br>
+&gt;&gt;&gt;&nbsp;<a href="#-pollard_pminus1_factor">pollard_pminus1_factor</a>(15)<br>
+(3,&nbsp;5)<br>
+&nbsp;<br>
+:param&nbsp;n:&nbsp;Number&nbsp;to&nbsp;factor<br>
+:return:&nbsp;The&nbsp;factors&nbsp;if&nbsp;it&nbsp;was&nbsp;able&nbsp;to&nbsp;factor,&nbsp;False&nbsp;otherwise</tt></dd></dl>
+ <dl><dt><a name="-pollard_rho_factor"><strong>pollard_rho_factor</strong></a>(n)</dt><dd><tt>Source:&nbsp;(modified)&nbsp;Cormen,&nbsp;Leiserson,&nbsp;Rivest,&nbsp;Stein<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;<a href="#-pollard_rho_factor">pollard_rho_factor</a>(517)<br>
+(11,&nbsp;47)<br>
+&gt;&gt;&gt;&nbsp;<a href="#-pollard_rho_factor">pollard_rho_factor</a>(561)<br>
+(3,&nbsp;187)<br>
+&gt;&gt;&gt;&nbsp;<a href="#-pollard_rho_factor">pollard_rho_factor</a>(4)<br>
+(2,&nbsp;2)<br>
+&gt;&gt;&gt;&nbsp;<a href="#-pollard_rho_factor">pollard_rho_factor</a>(8)<br>
+(2,&nbsp;4)<br>
+&gt;&gt;&gt;&nbsp;<a href="#-pollard_rho_factor">pollard_rho_factor</a>(15)<br>
+(3,&nbsp;5)<br>
+&nbsp;<br>
+:param&nbsp;n:&nbsp;Composite&nbsp;number&nbsp;to&nbsp;be&nbsp;factored<br>
+:return:&nbsp;Factors&nbsp;of&nbsp;n&nbsp;if&nbsp;factorable,&nbsp;False&nbsp;if&nbsp;cannot&nbsp;be&nbsp;factored</tt></dd></dl>
+ <dl><dt><a name="-random_prime"><strong>random_prime</strong></a>(b, bound<font color="#909090">=1000</font>)</dt><dd><tt>WARNING:&nbsp;Not&nbsp;cryptographically&nbsp;secure<br>
+Next&nbsp;steps:&nbsp;Test&nbsp;output&nbsp;value&nbsp;with&nbsp;some&nbsp;prime&nbsp;testing&nbsp;library<br>
+&nbsp;<br>
+#&nbsp;&gt;&gt;&gt;&nbsp;print(<a href="#-random_prime">random_prime</a>(1024,&nbsp;1000))<br>
+#&nbsp;None<br>
+&nbsp;<br>
+:param&nbsp;b:&nbsp;See&nbsp;returned&nbsp;value<br>
+:param&nbsp;bound:&nbsp;How&nbsp;many&nbsp;random&nbsp;values&nbsp;would&nbsp;you&nbsp;like&nbsp;to&nbsp;test?<br>
+:return:&nbsp;Generates&nbsp;random&nbsp;prime&nbsp;between&nbsp;2^(b+1)-1&nbsp;and&nbsp;2^b&nbsp;-&nbsp;1</tt></dd></dl>
+</td></tr></table>
+</body></html>

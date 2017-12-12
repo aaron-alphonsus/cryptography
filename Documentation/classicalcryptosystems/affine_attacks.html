@@ -1,0 +1,107 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module affine_attacks</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>affine_attacks</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/student/7296837/Documents/csc412-crypto/Cryptography/classicalcryptosystems/affine_attacks.py">/home/student/7296837/Documents/csc412-crypto/Cryptography/classicalcryptosystems/affine_attacks.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-chosen_ciphertext"><strong>chosen_ciphertext</strong></a>(plaintext, num_alphabets)</dt><dd><tt>Similar&nbsp;to&nbsp;the&nbsp;chosen&nbsp;plaintext<br>
+Choose&nbsp;"ab"&nbsp;as&nbsp;your&nbsp;ciphertext.&nbsp;Let&nbsp;plaintext&nbsp;be&nbsp;the&nbsp;letters&nbsp;we&nbsp;get&nbsp;on<br>
+running&nbsp;our&nbsp;ciphertext&nbsp;through&nbsp;the&nbsp;decryption<br>
+&nbsp;<br>
+Let&nbsp;p1&nbsp;and&nbsp;p2&nbsp;be&nbsp;your&nbsp;two&nbsp;plaintext&nbsp;character&nbsp;numbers.<br>
+Now,&nbsp;the&nbsp;two&nbsp;equations&nbsp;are:<br>
+alpha'&nbsp;.&nbsp;0&nbsp;+&nbsp;beta'&nbsp;=&nbsp;p1&nbsp;i.e.&nbsp;beta'&nbsp;=&nbsp;p1<br>
+alpha'&nbsp;+&nbsp;beta'&nbsp;=&nbsp;p2&nbsp;i.e.&nbsp;alpha'&nbsp;=&nbsp;p2&nbsp;-&nbsp;p1&nbsp;(mod&nbsp;n)<br>
+&nbsp;<br>
+Now,&nbsp;as&nbsp;the&nbsp;text&nbsp;says,&nbsp;you&nbsp;could&nbsp;solve&nbsp;for&nbsp;the&nbsp;encryption&nbsp;key,&nbsp;but&nbsp;why<br>
+bother?&nbsp;We&nbsp;have&nbsp;the&nbsp;decryption&nbsp;key&nbsp;and&nbsp;that's&nbsp;all&nbsp;we&nbsp;want.<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;<a href="#-chosen_plaintext">chosen_plaintext</a>("jx",&nbsp;26)<br>
+(14,&nbsp;9)<br>
+&gt;&gt;&gt;&nbsp;<a href="#-chosen_plaintext">chosen_plaintext</a>("xj",&nbsp;26)<br>
+(12,&nbsp;23)<br>
+&nbsp;<br>
+:param&nbsp;plaintext:&nbsp;The&nbsp;plaintext&nbsp;received&nbsp;on&nbsp;decrypting&nbsp;"ab"<br>
+:param&nbsp;num_alphabets:&nbsp;Number&nbsp;of&nbsp;alphabets&nbsp;used&nbsp;for&nbsp;the&nbsp;cipher<br>
+:return:&nbsp;Decryption&nbsp;key&nbsp;tuple</tt></dd></dl>
+ <dl><dt><a name="-chosen_plaintext"><strong>chosen_plaintext</strong></a>(ciphertext, num_alphabets)</dt><dd><tt>This&nbsp;is&nbsp;a&nbsp;'subset'&nbsp;of&nbsp;known&nbsp;plaintext&nbsp;-&nbsp;we&nbsp;can&nbsp;choose&nbsp;plaintext&nbsp;that&nbsp;makes<br>
+the&nbsp;system&nbsp;of&nbsp;equations&nbsp;that&nbsp;we&nbsp;get&nbsp;easy&nbsp;to&nbsp;solve<br>
+&nbsp;<br>
+Choose&nbsp;"ab"&nbsp;as&nbsp;your&nbsp;plaintext.&nbsp;In&nbsp;this&nbsp;implementation&nbsp;we&nbsp;let&nbsp;ciphertext&nbsp;be<br>
+the&nbsp;letters&nbsp;we&nbsp;get&nbsp;on&nbsp;running&nbsp;our&nbsp;plaintext&nbsp;through&nbsp;the&nbsp;encryption.<br>
+&nbsp;<br>
+Let&nbsp;c1&nbsp;and&nbsp;c2&nbsp;be&nbsp;your&nbsp;two&nbsp;ciphertext&nbsp;character&nbsp;numbers.<br>
+Now,&nbsp;the&nbsp;two&nbsp;equations&nbsp;are:<br>
+alpha&nbsp;.&nbsp;0&nbsp;+&nbsp;beta&nbsp;=&nbsp;c1&nbsp;i.e.&nbsp;beta&nbsp;=&nbsp;c1<br>
+alpha&nbsp;+&nbsp;beta&nbsp;=&nbsp;c2&nbsp;i.e.&nbsp;alpha&nbsp;=&nbsp;c2&nbsp;-&nbsp;c1&nbsp;(mod&nbsp;n)<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;<a href="#-chosen_plaintext">chosen_plaintext</a>("gk",&nbsp;26)<br>
+(4,&nbsp;6)<br>
+&gt;&gt;&gt;&nbsp;<a href="#-chosen_plaintext">chosen_plaintext</a>("kg",&nbsp;26)<br>
+(22,&nbsp;10)<br>
+&nbsp;<br>
+:param&nbsp;ciphertext:&nbsp;The&nbsp;ciphertext&nbsp;received&nbsp;on&nbsp;encrypting&nbsp;"ab"<br>
+:param&nbsp;num_alphabets:&nbsp;Number&nbsp;of&nbsp;alphabets&nbsp;used&nbsp;for&nbsp;the&nbsp;cipher<br>
+:return:&nbsp;Encryption&nbsp;key&nbsp;tuple</tt></dd></dl>
+ <dl><dt><a name="-ciphertext_only"><strong>ciphertext_only</strong></a>(ciphertext, num_alphabets)</dt><dd><tt>This&nbsp;is&nbsp;a&nbsp;brute&nbsp;force&nbsp;attack.&nbsp;We&nbsp;check&nbsp;every&nbsp;possible&nbsp;alpha,&nbsp;beta&nbsp;pair&nbsp;and<br>
+use&nbsp;it&nbsp;to&nbsp;decrypt&nbsp;our&nbsp;ciphertext.<br>
+The&nbsp;attack&nbsp;returns&nbsp;a&nbsp;dictionary&nbsp;of&nbsp;plaintexts&nbsp;that&nbsp;have&nbsp;been&nbsp;decrypted&nbsp;and<br>
+their&nbsp;associated&nbsp;alpha&nbsp;and&nbsp;beta&nbsp;values.<br>
+&nbsp;<br>
+Next&nbsp;steps:<br>
+&nbsp;-&nbsp;Run&nbsp;the&nbsp;dictionary&nbsp;values&nbsp;through&nbsp;a&nbsp;function&nbsp;that&nbsp;checks&nbsp;whether&nbsp;a&nbsp;word<br>
+&nbsp;&nbsp;&nbsp;is&nbsp;in&nbsp;the&nbsp;English&nbsp;dictionary&nbsp;to&nbsp;eliminate&nbsp;decryptions&nbsp;that&nbsp;are&nbsp;not<br>
+&nbsp;&nbsp;&nbsp;meaningful.<br>
+&nbsp;-&nbsp;For&nbsp;longer&nbsp;texts,&nbsp;run&nbsp;the&nbsp;decrypted&nbsp;text&nbsp;through&nbsp;a&nbsp;frequency&nbsp;analysis&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;check&nbsp;for&nbsp;possible&nbsp;correct&nbsp;decryptions.<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;plaintexts&nbsp;=&nbsp;<a href="#-ciphertext_only">ciphertext_only</a>('cvvwpm',&nbsp;26)<br>
+&gt;&gt;&gt;&nbsp;plaintexts[(9,&nbsp;2)]<br>
+'affine'<br>
+&nbsp;<br>
+:param&nbsp;ciphertext:&nbsp;The&nbsp;ciphertext&nbsp;that&nbsp;needs&nbsp;to&nbsp;be&nbsp;cracked<br>
+:param&nbsp;num_alphabets:&nbsp;Length&nbsp;of&nbsp;the&nbsp;alphabet&nbsp;that&nbsp;was&nbsp;used<br>
+:return:</tt></dd></dl>
+ <dl><dt><a name="-known_plaintext"><strong>known_plaintext</strong></a>(plaintext, ciphertext, num_alphabets)</dt><dd><tt>Takes&nbsp;in&nbsp;plaintext&nbsp;and&nbsp;corresponding&nbsp;ciphertext.&nbsp;The&nbsp;length&nbsp;of&nbsp;both&nbsp;these<br>
+strings&nbsp;are&nbsp;assumed&nbsp;to&nbsp;be&nbsp;equal<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;works&nbsp;only&nbsp;if&nbsp;we&nbsp;have&nbsp;at&nbsp;least&nbsp;two&nbsp;letters&nbsp;of&nbsp;the&nbsp;plaintext&nbsp;and<br>
+corresponding&nbsp;letters&nbsp;of&nbsp;the&nbsp;ciphertext.<br>
+Otherwise,&nbsp;it&nbsp;devolves&nbsp;into&nbsp;a&nbsp;brute&nbsp;force&nbsp;method&nbsp;and&nbsp;returns&nbsp;a&nbsp;list&nbsp;of<br>
+possible&nbsp;keys.<br>
+&nbsp;<br>
+Next&nbsp;steps:<br>
+&nbsp;-&nbsp;Go&nbsp;through&nbsp;all&nbsp;combos&nbsp;of&nbsp;two&nbsp;plaintext&nbsp;letters&nbsp;and&nbsp;calculate<br>
+&nbsp;&nbsp;&nbsp;&nbsp;gcd(p1&nbsp;-&nbsp;p2,&nbsp;n)<br>
+&nbsp;-&nbsp;If&nbsp;gcd&nbsp;=&nbsp;1&nbsp;is&nbsp;found,&nbsp;use&nbsp;that&nbsp;pair&nbsp;and&nbsp;feed&nbsp;it&nbsp;into&nbsp;the&nbsp;matrix<br>
+&nbsp;-&nbsp;else&nbsp;look&nbsp;for&nbsp;gcd&nbsp;=&nbsp;2,&nbsp;manually&nbsp;calculate&nbsp;the&nbsp;two&nbsp;alphas&nbsp;and&nbsp;one&nbsp;beta.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;the&nbsp;valid&nbsp;key(s?)<br>
+&nbsp;-&nbsp;else&nbsp;use&nbsp;the&nbsp;one&nbsp;letter&nbsp;function<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;<a href="#-known_plaintext">known_plaintext</a>("g",&nbsp;"t",&nbsp;26)<br>
+[(1,&nbsp;13),&nbsp;(3,&nbsp;1),&nbsp;(5,&nbsp;15),&nbsp;(7,&nbsp;3),&nbsp;(9,&nbsp;17),&nbsp;(11,&nbsp;5),&nbsp;(15,&nbsp;7),&nbsp;(17,&nbsp;-5),&nbsp;(19,&nbsp;9),&nbsp;(21,&nbsp;-3),&nbsp;(23,&nbsp;11),&nbsp;(25,&nbsp;-1)]<br>
+&nbsp;<br>
+#&nbsp;&gt;&gt;&gt;&nbsp;<a href="#-known_plaintext">known_plaintext</a>("an",&nbsp;"ft",&nbsp;26)<br>
+#&nbsp;None<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;<a href="#-known_plaintext">known_plaintext</a>("if",&nbsp;"pq",&nbsp;26)<br>
+(17,&nbsp;9)<br>
+&nbsp;<br>
+:param&nbsp;plaintext:<br>
+:param&nbsp;ciphertext:<br>
+:return:</tt></dd></dl>
+</td></tr></table>
+</body></html>

@@ -1,0 +1,53 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module inv_matrix_mod</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>inv_matrix_mod</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/student/7296837/Documents/csc412-crypto/Cryptography/basicnumbertheory/inv_matrix_mod.py">/home/student/7296837/Documents/csc412-crypto/Cryptography/basicnumbertheory/inv_matrix_mod.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-inv_matrix_mod"><strong>inv_matrix_mod</strong></a>(m, n)</dt><dd><tt>Calculates&nbsp;inverse&nbsp;m&nbsp;(mod&nbsp;n).&nbsp;Uses&nbsp;the&nbsp;numpy&nbsp;library&nbsp;to&nbsp;calculate&nbsp;the<br>
+determinant&nbsp;and&nbsp;adj.&nbsp;matrix.<br>
+&nbsp;<br>
+Textbook&nbsp;example<br>
+&gt;&gt;&gt;&nbsp;m&nbsp;=&nbsp;[[1,&nbsp;2],<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3,&nbsp;4]]<br>
+&gt;&gt;&gt;&nbsp;<a href="#-inv_matrix_mod">inv_matrix_mod</a>(m,&nbsp;11)<br>
+[[9,&nbsp;1],&nbsp;[7,&nbsp;5]]<br>
+&nbsp;<br>
+Textbook&nbsp;example&nbsp;3x3<br>
+&gt;&gt;&gt;&nbsp;m&nbsp;=&nbsp;[[1,&nbsp;1,&nbsp;1],<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[1,&nbsp;2,&nbsp;3],<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[1,&nbsp;4,&nbsp;9]]<br>
+&gt;&gt;&gt;&nbsp;<a href="#-inv_matrix_mod">inv_matrix_mod</a>(m,&nbsp;11)<br>
+[[3,&nbsp;3,&nbsp;6],&nbsp;[8,&nbsp;4,&nbsp;10],&nbsp;[1,&nbsp;4,&nbsp;6]]<br>
+&nbsp;<br>
+Random&nbsp;example<br>
+&gt;&gt;&gt;&nbsp;m&nbsp;=&nbsp;[[4,&nbsp;7],<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[2,&nbsp;6]]<br>
+&gt;&gt;&gt;&nbsp;<a href="#-inv_matrix_mod">inv_matrix_mod</a>(m,&nbsp;11)<br>
+[[5,&nbsp;7],&nbsp;[2,&nbsp;7]]<br>
+&nbsp;<br>
+Invalid&nbsp;example<br>
+&gt;&gt;&gt;&nbsp;m&nbsp;=&nbsp;[[4,&nbsp;7],<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[2,&nbsp;6]]<br>
+&gt;&gt;&gt;&nbsp;<a href="#-inv_matrix_mod">inv_matrix_mod</a>(m,&nbsp;15)<br>
+[]<br>
+&nbsp;<br>
+:param&nbsp;m:&nbsp;Matrix<br>
+:param&nbsp;n:&nbsp;modulus<br>
+:return:&nbsp;[]&nbsp;if&nbsp;det(m),&nbsp;n&nbsp;are&nbsp;not&nbsp;relatively&nbsp;prime<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;m&nbsp;(mod&nbsp;n),&nbsp;otherwise</tt></dd></dl>
+</td></tr></table>
+</body></html>

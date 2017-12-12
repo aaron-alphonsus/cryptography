@@ -1,0 +1,91 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module simpdes</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>simpdes</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/student/7296837/Documents/csc412-crypto/Cryptography/des/simpdes.py">/home/student/7296837/Documents/csc412-crypto/Cryptography/des/simpdes.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-decrypt"><strong>decrypt</strong></a>(ciphertext, key, rounds<font color="#909090">=4</font>)</dt><dd><tt>Takes&nbsp;in&nbsp;a&nbsp;12-bit&nbsp;ciphertext&nbsp;and&nbsp;splits&nbsp;it&nbsp;into&nbsp;two&nbsp;6-bit&nbsp;ciphertexts<br>
+left(0)&nbsp;and&nbsp;right(0).<br>
+The&nbsp;algorithm&nbsp;is&nbsp;calculated&nbsp;as&nbsp;follows&nbsp;(for&nbsp;'rounds'&nbsp;to&nbsp;0,&nbsp;decrementing):<br>
+right(i-1)&nbsp;=&nbsp;left(i)<br>
+left(i-1)&nbsp;=&nbsp;right(i)&nbsp;xor&nbsp;<a href="#-f">f</a>(left(i),&nbsp;key(i))<br>
+&nbsp;<br>
+Example&nbsp;from&nbsp;text<br>
+&gt;&gt;&gt;&nbsp;<a href="#-decrypt">decrypt</a>('100110011000',&nbsp;'011001010',&nbsp;1)<br>
+'011100100110'<br>
+&nbsp;<br>
+Testing&nbsp;4&nbsp;rounds<br>
+&gt;&gt;&gt;&nbsp;<a href="#-decrypt">decrypt</a>('001100010110',&nbsp;'011001010')<br>
+'011100100110'<br>
+&nbsp;<br>
+:param&nbsp;ciphertext:&nbsp;12-bit&nbsp;ciphertext&nbsp;to&nbsp;be&nbsp;decrypted<br>
+:param&nbsp;key:&nbsp;9-bit&nbsp;key<br>
+:param&nbsp;rounds:&nbsp;Number&nbsp;of&nbsp;rounds&nbsp;-&nbsp;defaults&nbsp;to&nbsp;4<br>
+:return:&nbsp;Decrypted&nbsp;ciphertext</tt></dd></dl>
+ <dl><dt><a name="-encrypt"><strong>encrypt</strong></a>(message, key, rounds<font color="#909090">=4</font>)</dt><dd><tt>Takes&nbsp;in&nbsp;a&nbsp;12-bit&nbsp;message&nbsp;and&nbsp;splits&nbsp;it&nbsp;into&nbsp;two&nbsp;6-bit&nbsp;messages&nbsp;left(0)&nbsp;and<br>
+right(0).<br>
+The&nbsp;algorithm&nbsp;is&nbsp;calculated&nbsp;as&nbsp;follows&nbsp;(for&nbsp;'i'&nbsp;=&nbsp;1&nbsp;to&nbsp;'rounds'):<br>
+left(i)&nbsp;=&nbsp;right(i-1)<br>
+right(i)&nbsp;=&nbsp;left(i-1)&nbsp;xor&nbsp;<a href="#-f">f</a>(right(i-1),&nbsp;key(i))<br>
+&nbsp;<br>
+Example&nbsp;from&nbsp;text<br>
+&gt;&gt;&gt;&nbsp;<a href="#-encrypt">encrypt</a>('011100100110',&nbsp;'011001010',&nbsp;1)<br>
+'100110011000'<br>
+&nbsp;<br>
+Testing&nbsp;3&nbsp;rounds&nbsp;from&nbsp;textbook&nbsp;example&nbsp;for&nbsp;diff&nbsp;cryptanalysis<br>
+&gt;&gt;&gt;&nbsp;<a href="#-encrypt">encrypt</a>('000111011011',&nbsp;'010011010',&nbsp;3)<br>
+'000011100101'<br>
+&nbsp;<br>
+Testing&nbsp;4&nbsp;rounds<br>
+&gt;&gt;&gt;&nbsp;<a href="#-encrypt">encrypt</a>('011100100110',&nbsp;'011001010')<br>
+'001100010110'<br>
+&nbsp;<br>
+:param&nbsp;message:&nbsp;12-bit&nbsp;message&nbsp;to&nbsp;be&nbsp;encrypted<br>
+:param&nbsp;key:&nbsp;9-bit&nbsp;key<br>
+:param&nbsp;rounds:&nbsp;Number&nbsp;of&nbsp;rounds&nbsp;-&nbsp;defaults&nbsp;to&nbsp;4<br>
+:return:&nbsp;Encrypted&nbsp;message</tt></dd></dl>
+ <dl><dt><a name="-expander"><strong>expander</strong></a>(r)</dt><dd><tt>This&nbsp;function&nbsp;takes&nbsp;a&nbsp;6-bit&nbsp;input&nbsp;and&nbsp;produces&nbsp;an&nbsp;8-bit&nbsp;output.<br>
+Numbering&nbsp;the&nbsp;input&nbsp;bits&nbsp;1,&nbsp;2,&nbsp;3,&nbsp;4,&nbsp;5,&nbsp;6&nbsp;the&nbsp;output&nbsp;bits&nbsp;will&nbsp;be:<br>
+1,&nbsp;2,&nbsp;4,&nbsp;3,&nbsp;4,&nbsp;3,&nbsp;5,&nbsp;6<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;<a href="#-expander">expander</a>('011001')<br>
+'01010101'<br>
+&nbsp;<br>
+:param&nbsp;r:&nbsp;6-bit&nbsp;string<br>
+:return:&nbsp;Input&nbsp;expanded&nbsp;to&nbsp;8-bit&nbsp;string</tt></dd></dl>
+ <dl><dt><a name="-f"><strong>f</strong></a>(r, key)</dt><dd><tt>The&nbsp;f&nbsp;function&nbsp;is&nbsp;a&nbsp;large&nbsp;part&nbsp;of&nbsp;the&nbsp;DES&nbsp;and&nbsp;calls&nbsp;a&nbsp;lot&nbsp;of&nbsp;other&nbsp;functions<br>
+Takes&nbsp;in&nbsp;an&nbsp;r&nbsp;value&nbsp;and&nbsp;expands&nbsp;it.<br>
+Takes&nbsp;an&nbsp;XOR&nbsp;of&nbsp;the&nbsp;key&nbsp;and&nbsp;result,&nbsp;formatting&nbsp;the&nbsp;result&nbsp;to&nbsp;8&nbsp;bits<br>
+First&nbsp;4&nbsp;bits&nbsp;go&nbsp;to&nbsp;S1&nbsp;and&nbsp;last&nbsp;4&nbsp;go&nbsp;to&nbsp;S2.&nbsp;They&nbsp;each&nbsp;return&nbsp;a&nbsp;3-bit&nbsp;output<br>
+which&nbsp;is&nbsp;concatenated&nbsp;to&nbsp;form&nbsp;a&nbsp;6-bit&nbsp;result.<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;<a href="#-f">f</a>('100110',&nbsp;'01100101')<br>
+'000100'<br>
+&nbsp;<br>
+:param&nbsp;r:&nbsp;6-bit&nbsp;previous&nbsp;right<br>
+:param&nbsp;key:&nbsp;8-bit&nbsp;current&nbsp;key<br>
+:return:&nbsp;6-bit&nbsp;output&nbsp;from&nbsp;the&nbsp;2&nbsp;S-boxes</tt></dd></dl>
+ <dl><dt><a name="-s1_box"><strong>s1_box</strong></a>(s1_input)</dt></dl>
+ <dl><dt><a name="-s2_box"><strong>s2_box</strong></a>(s2_input)</dt></dl>
+ <dl><dt><a name="-s_boxes"><strong>s_boxes</strong></a>(input1, input2)</dt><dd><tt>Uses&nbsp;input1&nbsp;and&nbsp;input2&nbsp;to&nbsp;index&nbsp;into&nbsp;the&nbsp;two&nbsp;S-boxes<br>
+&nbsp;<br>
+TODO:&nbsp;split&nbsp;into&nbsp;two&nbsp;functions&nbsp;s1&nbsp;and&nbsp;s2&nbsp;to&nbsp;make&nbsp;diff&nbsp;cryptanalysis&nbsp;easy<br>
+&nbsp;<br>
+:param&nbsp;input1:&nbsp;First&nbsp;4&nbsp;bits&nbsp;of&nbsp;(<a href="#-expander">expander</a>(r)&nbsp;xor&nbsp;key)<br>
+:param&nbsp;input2:&nbsp;Last&nbsp;4&nbsp;bits&nbsp;of&nbsp;(<a href="#-expander">expander</a>(r)&nbsp;xor&nbsp;key)<br>
+:return:&nbsp;6-bit&nbsp;concatenated&nbsp;S-box&nbsp;output</tt></dd></dl>
+</td></tr></table>
+</body></html>

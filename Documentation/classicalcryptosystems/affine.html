@@ -1,0 +1,62 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module affine</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>affine</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/student/7296837/Documents/csc412-crypto/Cryptography/classicalcryptosystems/affine.py">/home/student/7296837/Documents/csc412-crypto/Cryptography/classicalcryptosystems/affine.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-decode"><strong>decode</strong></a>(cipher_text, alpha, beta, num_alphabets)</dt><dd><tt>decode&nbsp;calculates&nbsp;the&nbsp;decryption&nbsp;function&nbsp;(if&nbsp;possible)&nbsp;and&nbsp;then&nbsp;decrypts<br>
+the&nbsp;string.<br>
+&nbsp;<br>
+Examples&nbsp;from&nbsp;the&nbsp;text<br>
+&gt;&gt;&gt;&nbsp;<a href="#-decode">decode</a>('cvvwpm',&nbsp;9,&nbsp;2,&nbsp;26)<br>
+'affine'<br>
+&gt;&gt;&gt;&nbsp;<a href="#-decode">decode</a>('errer',&nbsp;13,&nbsp;4,&nbsp;26)<br>
+Ciphertext&nbsp;does&nbsp;not&nbsp;have&nbsp;a&nbsp;unique&nbsp;decryption.<br>
+gcd(13,&nbsp;26)&nbsp;does&nbsp;not&nbsp;equal&nbsp;1.<br>
+&nbsp;<br>
+Example&nbsp;with&nbsp;upper&nbsp;case&nbsp;characters<br>
+&gt;&gt;&gt;&nbsp;<a href="#-decode">decode</a>('CVvwPm',&nbsp;9,&nbsp;2,&nbsp;26)<br>
+'AFfiNe'<br>
+&nbsp;<br>
+:param&nbsp;cipher_text:&nbsp;ciphertext&nbsp;to&nbsp;be&nbsp;decrypted<br>
+:param&nbsp;alpha:&nbsp;alpha&nbsp;coefficient&nbsp;for&nbsp;the&nbsp;affine&nbsp;cipher<br>
+:param&nbsp;beta:&nbsp;beta&nbsp;coefficient&nbsp;for&nbsp;the&nbsp;affine&nbsp;cipher<br>
+:param&nbsp;num_alphabets:&nbsp;characters&nbsp;used&nbsp;in&nbsp;our&nbsp;encryption<br>
+:return:&nbsp;decrypted&nbsp;ciphertext</tt></dd></dl>
+ <dl><dt><a name="-encode"><strong>encode</strong></a>(plaintext, alpha, beta, num_alphabets)</dt><dd><tt>The&nbsp;encode&nbsp;function&nbsp;works&nbsp;on&nbsp;the&nbsp;input&nbsp;string,&nbsp;transforming&nbsp;each&nbsp;letter&nbsp;by<br>
+multiplying&nbsp;it&nbsp;by&nbsp;alpha&nbsp;and&nbsp;adding&nbsp;beta&nbsp;to&nbsp;it.&nbsp;It&nbsp;handles&nbsp;both&nbsp;uppercase<br>
+and&nbsp;lowercase&nbsp;inputs.<br>
+Command&nbsp;Line&nbsp;Example:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;python&nbsp;-c&nbsp;'from&nbsp;affine&nbsp;import&nbsp;encode;&nbsp;print&nbsp;<a href="#-encode">encode</a>("affine",&nbsp;9,&nbsp;2)'<br>
+&nbsp;<br>
+Examples&nbsp;from&nbsp;the&nbsp;text<br>
+&gt;&gt;&gt;&nbsp;<a href="#-encode">encode</a>('affine',&nbsp;9,&nbsp;2,&nbsp;26)<br>
+'cvvwpm'<br>
+&gt;&gt;&gt;&nbsp;<a href="#-encode">encode</a>('input',&nbsp;13,&nbsp;4,&nbsp;26)<br>
+Ciphertext&nbsp;will&nbsp;not&nbsp;have&nbsp;a&nbsp;unique&nbsp;decryption.<br>
+gcd(13,&nbsp;26)&nbsp;does&nbsp;not&nbsp;equal&nbsp;1.<br>
+&nbsp;<br>
+Example&nbsp;with&nbsp;upper&nbsp;case&nbsp;characters<br>
+&gt;&gt;&gt;&nbsp;<a href="#-encode">encode</a>('AFfiNe',&nbsp;9,&nbsp;2,&nbsp;26)<br>
+'CVvwPm'<br>
+&nbsp;<br>
+:param&nbsp;plaintext:&nbsp;plaintext&nbsp;to&nbsp;be&nbsp;encrypted<br>
+:param&nbsp;alpha:&nbsp;alpha&nbsp;coefficient&nbsp;for&nbsp;the&nbsp;affine&nbsp;cipher<br>
+:param&nbsp;beta:&nbsp;beta&nbsp;coefficient&nbsp;for&nbsp;the&nbsp;affine&nbsp;cipher<br>
+:param&nbsp;num_alphabets:&nbsp;characters&nbsp;used&nbsp;in&nbsp;our&nbsp;encryption<br>
+:return:&nbsp;encrypted&nbsp;plaintext</tt></dd></dl>
+</td></tr></table>
+</body></html>

@@ -1,0 +1,52 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module rsa</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>rsa</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/student/7296837/Documents/csc412-crypto/Cryptography/rsa/rsa.py">/home/student/7296837/Documents/csc412-crypto/Cryptography/rsa/rsa.py</a></font></td></tr></table>
+    <p><tt>#&nbsp;With&nbsp;this&nbsp;one,&nbsp;I&nbsp;was&nbsp;in&nbsp;two&nbsp;minds&nbsp;whether&nbsp;to&nbsp;generate&nbsp;new&nbsp;primes&nbsp;each&nbsp;time&nbsp;or<br>
+#&nbsp;to&nbsp;have&nbsp;doctests.&nbsp;In&nbsp;the&nbsp;end,&nbsp;I&nbsp;wanted&nbsp;to&nbsp;be&nbsp;consistent&nbsp;with&nbsp;providing<br>
+#&nbsp;doctests&nbsp;in&nbsp;all&nbsp;my&nbsp;main&nbsp;functions,&nbsp;and&nbsp;used&nbsp;primes&nbsp;that&nbsp;were&nbsp;already&nbsp;genrated.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-decrypt"><strong>decrypt</strong></a>(cipher)</dt><dd><tt>Takes&nbsp;in&nbsp;the&nbsp;cipher&nbsp;and&nbsp;decrypts&nbsp;it&nbsp;using&nbsp;the&nbsp;private&nbsp;value&nbsp;d&nbsp;and&nbsp;public<br>
+value&nbsp;n&nbsp;in&nbsp;the&nbsp;formula&nbsp;c^d(mod&nbsp;n).&nbsp;Converts&nbsp;this&nbsp;decrypted&nbsp;string&nbsp;back&nbsp;to<br>
+its&nbsp;alphabetical&nbsp;values<br>
+&nbsp;<br>
+Example&nbsp;from&nbsp;text<br>
+&gt;&gt;&gt;&nbsp;<a href="#-decrypt">decrypt</a>('76361619689947957826453014003338795527690911871909025105191'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'14360407469817440544361685224233679312049978294736018243999366707605193'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'77943012567374518731052479394802774791886382977743888869194550652445100'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'81814714844755050106261709278066809724007140851120259132888147550135672'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'854933871225677514975441223538079138')<br>
+'cat'<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;<a href="#-decrypt">decrypt</a>('106619873683134053332534708485130003697679573182992904238130'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'621318197680674711247283948256472448257140875619274890822719698896835899'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'108797926560301256607887776469486147906559715400627437490966291818657491'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'532471384429000686978858796590681112429448719686781143027030589975987190'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'567684272415860153703460513347713')<br>
+'python'<br>
+&nbsp;<br>
+:return:&nbsp;Decrypted&nbsp;cipher</tt></dd></dl>
+ <dl><dt><a name="-encrypt"><strong>encrypt</strong></a>(message)</dt><dd><tt>This&nbsp;is&nbsp;an&nbsp;implementation&nbsp;from&nbsp;the&nbsp;text.&nbsp;Assumes&nbsp;all&nbsp;messages&nbsp;to&nbsp;be<br>
+encrypted&nbsp;will&nbsp;be&nbsp;strings&nbsp;of&nbsp;all&nbsp;lowercase&nbsp;letters.&nbsp;It&nbsp;takes&nbsp;the&nbsp;message<br>
+and&nbsp;converts&nbsp;it&nbsp;to&nbsp;its&nbsp;integer&nbsp;representation,&nbsp;then&nbsp;encrypts&nbsp;it&nbsp;using&nbsp;the<br>
+formula&nbsp;m^e(mod&nbsp;n)<br>
+&nbsp;<br>
+Example&nbsp;from&nbsp;text<br>
+&gt;&gt;&gt;&nbsp;<a href="#-encrypt">encrypt</a>("cat")<br>
+'76361619689947957826453014003338795527690911871909025105191143604074698174405443616852242336793120499782947360182439993667076051937794301256737451873105247939480277479188638297774388886919455065244510081814714844755050106261709278066809724007140851120259132888147550135672854933871225677514975441223538079138'<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;<a href="#-encrypt">encrypt</a>("python")<br>
+'106619873683134053332534708485130003697679573182992904238130621318197680674711247283948256472448257140875619274890822719698896835899108797926560301256607887776469486147906559715400627437490966291818657491532471384429000686978858796590681112429448719686781143027030589975987190567684272415860153703460513347713'<br>
+&nbsp;<br>
+:param&nbsp;message:&nbsp;The&nbsp;message&nbsp;to&nbsp;be&nbsp;encrypted<br>
+:return:&nbsp;Encrypted&nbsp;plaintext</tt></dd></dl>
+ <dl><dt><a name="-setup"><strong>setup</strong></a>()</dt><dd><tt>Helper&nbsp;function&nbsp;to&nbsp;add&nbsp;d&nbsp;to&nbsp;the&nbsp;private&nbsp;rsa&nbsp;file&nbsp;and&nbsp;n&nbsp;to&nbsp;the&nbsp;public&nbsp;rsa<br>
+file.<br>
+:return:&nbsp;None</tt></dd></dl>
+</td></tr></table>
+</body></html>

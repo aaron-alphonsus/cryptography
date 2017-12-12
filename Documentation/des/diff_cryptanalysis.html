@@ -1,0 +1,32 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module diff_cryptanalysis</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>diff_cryptanalysis</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/student/7296837/Documents/csc412-crypto/Cryptography/des/diff_cryptanalysis.py">/home/student/7296837/Documents/csc412-crypto/Cryptography/des/diff_cryptanalysis.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-diff_cryptanalysis"><strong>diff_cryptanalysis</strong></a>(message, message_star, key)</dt><dd><tt>Differential&nbsp;cryptanalysis&nbsp;is&nbsp;a&nbsp;chosen&nbsp;plaintext&nbsp;attack&nbsp;on&nbsp;the&nbsp;DES.&nbsp;By<br>
+comparing&nbsp;the&nbsp;differences&nbsp;in&nbsp;the&nbsp;produced&nbsp;ciphertext,&nbsp;we&nbsp;can&nbsp;deduce<br>
+information&nbsp;about&nbsp;the&nbsp;key&nbsp;used.<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;<a href="#-diff_cryptanalysis">diff_cryptanalysis</a>(['000111011011',&nbsp;'010111011011'],&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;['101110011011',&nbsp;'101110011011'],&nbsp;'010011010')<br>
+'001001101'<br>
+&nbsp;<br>
+:param&nbsp;message:&nbsp;The&nbsp;two&nbsp;plaintexts&nbsp;to&nbsp;be&nbsp;encrypted<br>
+:param&nbsp;message_star:&nbsp;The&nbsp;suitbly&nbsp;chosen&nbsp;'paired'&nbsp;plaintexts<br>
+:param&nbsp;key:&nbsp;The&nbsp;key&nbsp;that&nbsp;we&nbsp;want&nbsp;to&nbsp;deduce<br>
+:return:&nbsp;The&nbsp;key&nbsp;that&nbsp;we&nbsp;have&nbsp;deciphered</tt></dd></dl>
+</td></tr></table>
+</body></html>

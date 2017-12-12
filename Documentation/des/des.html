@@ -1,0 +1,110 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module des</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>des</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/student/7296837/Documents/csc412-crypto/Cryptography/des/des.py">/home/student/7296837/Documents/csc412-crypto/Cryptography/des/des.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-cd_pick"><strong>cd_pick</strong></a>(c, d)</dt><dd><tt>This&nbsp;algorithm&nbsp;chooses&nbsp;48&nbsp;bits&nbsp;from&nbsp;the&nbsp;56&nbsp;bit&nbsp;string.&nbsp;This&nbsp;48-bit&nbsp;key&nbsp;then<br>
+gets&nbsp;XORed&nbsp;with&nbsp;the&nbsp;permuted&nbsp;key<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;<a href="#-cd_pick">cd_pick</a>('1110000110011001010101011111',&nbsp;'1010101011001100111100011110')<br>
+'000110110000001011101111111111000111000001110010'<br>
+&nbsp;<br>
+:param&nbsp;c:&nbsp;Left&nbsp;28&nbsp;bits&nbsp;of&nbsp;key<br>
+:param&nbsp;d:&nbsp;Right&nbsp;28&nbsp;bits&nbsp;of&nbsp;key<br>
+:return:&nbsp;Key&nbsp;for&nbsp;iteration&nbsp;i</tt></dd></dl>
+ <dl><dt><a name="-des"><strong>des</strong></a>(plaintext, key)</dt><dd><tt>Huge&nbsp;thank&nbsp;you&nbsp;to&nbsp;https://billstclair.com/grabbe/des.htm<br>
+Allowed&nbsp;me&nbsp;to&nbsp;see&nbsp;step-by-step&nbsp;output&nbsp;from&nbsp;the&nbsp;DES&nbsp;which&nbsp;made&nbsp;doctesting<br>
+really&nbsp;simple&nbsp;and&nbsp;effective<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;<a href="#-des">des</a>('8787878787878787',&nbsp;'0E329232EA6D0D73')<br>
+'0'<br>
+&gt;&gt;&gt;&nbsp;<a href="#-des">des</a>('0123456789ABCDEF',&nbsp;'133457799BBCDFF1')<br>
+'85e813540f0ab405'<br>
+&nbsp;<br>
+:param&nbsp;plaintext:<br>
+:param&nbsp;key:<br>
+:return:</tt></dd></dl>
+ <dl><dt><a name="-expansion"><strong>expansion</strong></a>(r)</dt><dd><tt>Expands&nbsp;the&nbsp;r&nbsp;value&nbsp;to&nbsp;XOR&nbsp;with&nbsp;the&nbsp;48&nbsp;bit&nbsp;permuted&nbsp;key<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;<a href="#-expansion">expansion</a>('11110000101010101111000010101010')<br>
+'011110100001010101010101011110100001010101010101'<br>
+&nbsp;<br>
+:param&nbsp;r:&nbsp;32-bit&nbsp;value&nbsp;to&nbsp;be&nbsp;expanded&nbsp;to&nbsp;48&nbsp;bits<br>
+:return:&nbsp;48-bit&nbsp;expanded&nbsp;value</tt></dd></dl>
+ <dl><dt><a name="-f"><strong>f</strong></a>(r, k)</dt><dd><tt>Once&nbsp;again,&nbsp;like&nbsp;in&nbsp;simpdes,&nbsp;f&nbsp;is&nbsp;one&nbsp;of&nbsp;the&nbsp;main,&nbsp;if&nbsp;not&nbsp;the&nbsp;main&nbsp;functions.<br>
+It&nbsp;takes&nbsp;in&nbsp;the&nbsp;right&nbsp;32&nbsp;bits&nbsp;of&nbsp;the&nbsp;message&nbsp;and&nbsp;the&nbsp;key<br>
+It&nbsp;calls&nbsp;the&nbsp;expansion&nbsp;function,&nbsp;produces&nbsp;the&nbsp;inputs&nbsp;for&nbsp;the&nbsp;s-boxes&nbsp;and<br>
+gets&nbsp;the&nbsp;outputs,&nbsp;finally&nbsp;calling&nbsp;a&nbsp;function&nbsp;to&nbsp;permute&nbsp;the&nbsp;returned&nbsp;string<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;<a href="#-f">f</a>('11110000101010101111000010101010',&nbsp;'000110110000001011101111111111000111000001110010')<br>
+'00100011010010101010100110111011'<br>
+&nbsp;<br>
+:param&nbsp;r:&nbsp;Right&nbsp;32&nbsp;bits&nbsp;of&nbsp;the&nbsp;message<br>
+:param&nbsp;k:&nbsp;The&nbsp;permuted&nbsp;key<br>
+:return:&nbsp;32-bit&nbsp;intermediate&nbsp;ciphertext</tt></dd></dl>
+ <dl><dt><a name="-initial_permutation"><strong>initial_permutation</strong></a>(m)</dt><dd><tt>The&nbsp;initial&nbsp;message&nbsp;is&nbsp;run&nbsp;through&nbsp;&nbsp;a&nbsp;permutation&nbsp;function<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;<a href="#-initial_permutation">initial_permutation</a>('0000000100100011010001010110011110001001101010111100110111101111')<br>
+('11001100000000001100110011111111',&nbsp;'11110000101010101111000010101010')<br>
+&nbsp;<br>
+:param&nbsp;m:&nbsp;The&nbsp;initial&nbsp;message&nbsp;to&nbsp;be&nbsp;permuted<br>
+:return:&nbsp;The&nbsp;left&nbsp;and&nbsp;right&nbsp;values&nbsp;that&nbsp;make&nbsp;up&nbsp;the&nbsp;permuted&nbsp;message</tt></dd></dl>
+ <dl><dt><a name="-inverse_ip"><strong>inverse_ip</strong></a>(r16l16)</dt><dd><tt>Run&nbsp;the&nbsp;final&nbsp;left&nbsp;and&nbsp;right&nbsp;values&nbsp;(switched)&nbsp;on&nbsp;the&nbsp;inverse&nbsp;of&nbsp;the&nbsp;initial<br>
+permutation&nbsp;to&nbsp;get&nbsp;the&nbsp;ciphertext<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;<a href="#-inverse_ip">inverse_ip</a>('0000101001001100110110011001010101000011010000100011001000110100')<br>
+'1000010111101000000100110101010000001111000010101011010000000101'<br>
+&nbsp;<br>
+:param&nbsp;r16l16:&nbsp;The&nbsp;final&nbsp;permutation&nbsp;r16l16<br>
+:return:&nbsp;Permutation&nbsp;of&nbsp;the&nbsp;string&nbsp;to&nbsp;yield&nbsp;the&nbsp;ciphertext</tt></dd></dl>
+ <dl><dt><a name="-key_permutation"><strong>key_permutation</strong></a>(k)</dt><dd><tt>The&nbsp;key&nbsp;runs&nbsp;through&nbsp;a&nbsp;permutation&nbsp;which&nbsp;also&nbsp;serves&nbsp;to&nbsp;discard&nbsp;of&nbsp;the<br>
+&nbsp;parity&nbsp;bits.<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;<a href="#-key_permutation">key_permutation</a>('0001001100110100010101110111100110011011101111001101111111110001')<br>
+('1111000011001100101010101111',&nbsp;'0101010101100110011110001111')<br>
+&nbsp;<br>
+:param&nbsp;k:&nbsp;The&nbsp;original&nbsp;64-bit&nbsp;key<br>
+:return:&nbsp;56-bit&nbsp;key&nbsp;with&nbsp;parity&nbsp;bits&nbsp;discarded</tt></dd></dl>
+ <dl><dt><a name="-left_shift"><strong>left_shift</strong></a>(c, d, i)</dt><dd><tt>Depending&nbsp;on&nbsp;which&nbsp;round,&nbsp;the&nbsp;left&nbsp;and&nbsp;right&nbsp;28&nbsp;bits&nbsp;of&nbsp;the&nbsp;key&nbsp;are&nbsp;shifted<br>
+to&nbsp;the&nbsp;left<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;<a href="#-left_shift">left_shift</a>('1111000011001100101010101111',&nbsp;'0101010101100110011110001111',&nbsp;1)<br>
+('1110000110011001010101011111',&nbsp;'1010101011001100111100011110')<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;<a href="#-left_shift">left_shift</a>('1100001100110010101010111111',&nbsp;'0101010110011001111000111101',&nbsp;3)<br>
+('0000110011001010101011111111',&nbsp;'0101011001100111100011110101')<br>
+&nbsp;<br>
+:param&nbsp;c:&nbsp;Left&nbsp;28&nbsp;bits&nbsp;of&nbsp;key<br>
+:param&nbsp;d:&nbsp;Right&nbsp;28&nbsp;bits&nbsp;of&nbsp;key<br>
+:param&nbsp;i:&nbsp;Iteration<br>
+:return:&nbsp;c,&nbsp;d&nbsp;shifted&nbsp;by&nbsp;appropriate&nbsp;value</tt></dd></dl>
+ <dl><dt><a name="-permute_string"><strong>permute_string</strong></a>(c)</dt><dd><tt>Run&nbsp;the&nbsp;string&nbsp;received&nbsp;from&nbsp;the&nbsp;s-boxes&nbsp;in&nbsp;a&nbsp;permutation<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;<a href="#-permute_string">permute_string</a>('01011100100000101011010110010111')<br>
+'00100011010010101010100110111011'<br>
+&nbsp;<br>
+:param&nbsp;c:&nbsp;c&nbsp;string&nbsp;to&nbsp;be&nbsp;permuted<br>
+:return:&nbsp;permuted&nbsp;32-bit&nbsp;string</tt></dd></dl>
+ <dl><dt><a name="-s_boxes"><strong>s_boxes</strong></a>(b)</dt><dd><tt>Takes&nbsp;in&nbsp;the&nbsp;inputs&nbsp;and&nbsp;indexes&nbsp;the&nbsp;S-boxes&nbsp;to&nbsp;produce&nbsp;the&nbsp;outputs<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;<a href="#-s_boxes">s_boxes</a>(['011000',&nbsp;'010001',&nbsp;'011110',&nbsp;'111010',&nbsp;'100001',&nbsp;'100110',&nbsp;'010100',&nbsp;'100111'])<br>
+['0101',&nbsp;'1100',&nbsp;'1000',&nbsp;'0010',&nbsp;'1011',&nbsp;'0101',&nbsp;'1001',&nbsp;'0111']<br>
+&nbsp;<br>
+:param&nbsp;b:&nbsp;List&nbsp;containing&nbsp;inputs&nbsp;b1,&nbsp;b2,&nbsp;...,&nbsp;b8<br>
+:return:&nbsp;List&nbsp;containing&nbsp;outputs&nbsp;c1,&nbsp;c2,&nbsp;...,&nbsp;c8</tt></dd></dl>
+</td></tr></table>
+</body></html>
