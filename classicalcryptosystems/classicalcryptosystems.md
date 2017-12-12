@@ -108,8 +108,8 @@ Next, convert the message into a vector of numbers for each character. You have
 
 ### Example
 
-M = [[1, 2, 3], [4, 5, 6],[11, 9, 8]]
-Plaintext = "abc" -> Vector = (0, 1, 2)
+M = [[1, 2, 3], [4, 5, 6],[11, 9, 8]]  
+Plaintext = "abc" -> Vector = (0, 1, 2)  
 'Cipher vector' = (0, 23, 22) (mod 26) -> Ciphertext = 'axw'
 
 The decryption here is the same algorithm, except the key is now the inverse
