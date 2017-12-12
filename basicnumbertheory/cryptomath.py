@@ -273,14 +273,17 @@ def is_square(x):
     :param x: Possible perfect square
     :return: True if perfect square, False otherwise
     """
-    y = x // 2
-    seen = {y}
-    while y * y != x:
-        y = (y + (x // y)) // 2
-        if y in seen:
-            return False
-        seen.add(y)
-    return True
+    if x < 2:
+        return True
+    else:
+        y = x // 2
+        seen = {y}
+        while y * y != x:
+            y = (y + (x // y)) // 2
+            if y in seen:
+                return False
+            seen.add(y)
+        return True
 
 def pollard_pminus1_factor(n):
     """

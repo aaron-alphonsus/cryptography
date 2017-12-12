@@ -7,6 +7,8 @@ def shanks(n, k):
 
     >>> shanks(11111, 1)
     (41, 271)
+    >>> shanks(21, 4)
+    (3, 7)
 
     :param n:
     :param k:
