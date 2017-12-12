@@ -6,7 +6,10 @@
 def gcd(a, b):
     """
     Source: Introduction to Algorithms - Cormen, Leiserson, Rivest, Stein
+    Calculates the greatest common divisor of a and b (i.e. the largest positive
+    integer that divides both numbers)
 
+    Examples:
     >>> gcd(69, 3)
     3
     >>> gcd(-69, -3)
@@ -34,8 +37,9 @@ def gcd(a, b):
 
 def extendedgcd(a, b):
     """
+
     Reference: http://anh.cs.luc.edu/331/notes/xgcd.pdf
-    TODO: Mention this reference in the .md
+    # TODO: Mention this reference in the .md
 
     >>> extendedgcd(26, 9)
     (1, -1, 3)
@@ -94,7 +98,7 @@ def findModInverse(a, b):
         # We always return the smallest positive mod inverse so this is good.
         return -1
     else:
-        if extendedgcd(a, b)[1] < 0:
+        if extendedgcd(a, b)[1] < 0:  # return the smallest positive mod inverse
             return extendedgcd(a, b)[1] + b
         else:
             return extendedgcd(a, b)[1]
@@ -104,7 +108,8 @@ def is_prime(n, r=64):
     """
     Next Steps: increase number of returned 2s (keep a list of small primes)
 
-    (1/4)^r chance that n is prime.
+    Uses the Miller-Rabin primality test which gives a (1/4)^r chance that n is
+    prime. (Miller-Rabin is probabilistic)
 
     >>> is_prime(561, 10)
     0
@@ -178,15 +183,15 @@ def is_prime(n, r=64):
                 # print "last b = " + str(b)
                 if not b == n-1:
                     return 0
-    # If you have reached here, you have appended 1 for every r
-    # (i.e. probably prime)
+    # If you have reached here, the algorithm has decided 'probably prime' for
+    # every trial
     return 1
 
 
 def random_prime(b, bound=1000):
     """
     WARNING: Not cryptographically secure
-    TODO: Test output value with some prime testing library
+    Next steps: Test output value with some prime testing library
 
     # >>> print(random_prime(1024, 1000))
     # None

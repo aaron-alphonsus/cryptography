@@ -53,12 +53,6 @@ def known_plaintext(plaintext, ciphertext, num_alphabets):
     >>> known_plaintext("g", "t", 26)
     [(1, 13), (3, 1), (5, 15), (7, 3), (9, 17), (11, 5), (15, 7), (17, -5), (19, 9), (21, -3), (23, 11), (25, -1)]
 
-    >>> known_plaintext("go", "th", 26)
-    (5, 15)
-
-    >>> known_plaintext("px", "hr", 26)
-    return one of these: [(5, 15), (18, 15)]
-
     # >>> known_plaintext("an", "ft", 26)
     # None
 
@@ -96,12 +90,13 @@ def known_plaintext(plaintext, ciphertext, num_alphabets):
     # When the determinant of the matrix and the number of alphabets is not
     # relatively prime
     if len(m_inv) == 0:
-        alpha = []
-        for a in range(num_alphabets):
-            if (m[0][0] - m[1][0]) * a % 26 == abs(c[0] - c[1]):
-                if gcd(a, num_alphabets) == 1:
-                    return a, (ord(ciphertext[0]) - ord('a') -
-                               (ord(plaintext[0]) - ord('a')) * a) % 26
+        return False
+        # alpha = []
+        # for a in range(num_alphabets):
+        #     if (m[0][0] - m[1][0]) * a % 26 == abs(c[0] - c[1]):
+        #         if gcd(a, num_alphabets) == 1:
+        #             return a, (ord(ciphertext[0]) - ord('a') -
+        #                        (ord(plaintext[0]) - ord('a')) * a) % 26
 
     print tuple((np.dot(m_inv, c) % 26).tolist())
 
