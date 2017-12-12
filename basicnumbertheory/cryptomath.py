@@ -39,7 +39,6 @@ def extendedgcd(a, b):
     """
 
     Reference: http://anh.cs.luc.edu/331/notes/xgcd.pdf
-    # TODO: Mention this reference in the .md
 
     >>> extendedgcd(26, 9)
     (1, -1, 3)
