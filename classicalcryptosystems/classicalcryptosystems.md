@@ -88,7 +88,7 @@ Decryption is similar to encryption except we do a backwards shift.
 
 The Viginère attack is done in 2 stages. First the key length is found by taking
 displacements of the ciphertext and calculating the number of coincidences. The
-displacement with the highest coinccidence is our best guess for the length of
+displacement with the highest coincidence is our best guess for the length of
 the key.
 
 Once we find the key length (n) we do the following
