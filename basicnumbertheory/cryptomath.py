@@ -46,6 +46,8 @@ def extendedgcd(a, b):
     (1, 3, -1)
     >>> extendedgcd(26, 6)
     (2, 1, -4)
+    >>> extendedgcd(19, 16)
+    (1, -5, 6)
 
     :param a: first number
     :param b: second number
@@ -66,7 +68,7 @@ def extendedgcd(a, b):
         # print "q =", q
         # print "x, prevx =", x, prevx
         # print "y, prevy =", y, prevy
-        # print "a, b= ", a, b
+        # print "a, b =", a, b
     return a, prevx, prevy
 
 
@@ -319,9 +321,12 @@ def pollard_pminus1_factor(n):
     # Then, b(B) = b (mod n)
     while 1:                               # Since we only get composite numbers
         b = a % n
+        # print "b1 =", b
         for j in range(2, bound):
             b = pow(b, j, n)
+            # print "b" + str(j) + " = " + str(b)
         d = gcd(b-1, n)                                    # Let d = gcd(b-1, n)
+        # print "d =", d
         if 1 < d < n:              # if 1 < d < n, d is a nontrivial factor of n
             return int(d), int(n/d)
         else:
@@ -353,9 +358,11 @@ def pollard_rho_factor(n):
         x = g(x)
         y = g(g(y))
         d = gcd(abs(x-y), n)
+        # print "x, y, d =", x, y, d
     if d == n:
         if not d & 1:
             return int(2), int(n/2)
+        return False
     else:
         return int(d), int(n/d)
 

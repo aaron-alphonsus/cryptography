@@ -47,6 +47,7 @@ def inv_matrix_mod(m, n):
 
     # calculate adj(matrix) and mod inverse of determinant
     m_inv = det * np.linalg.inv(m)
+    # print m_inv
     inv = cryptomath.findModInverse(det, n)
 
     # multiply matrix inverse with mod inverse and take (mod n) to get positive
