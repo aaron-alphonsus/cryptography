@@ -10,9 +10,9 @@ def shanks(n, k):
     >>> shanks(21, 4)
     (3, 7)
 
-    :param n:
-    :param k:
-    :return:
+    :param n: Number to find the factor of
+    :param k: Small multiplier
+    :return: False if unable to factor, non-trivial factors otherwise
     """
     from basicnumbertheory.cryptomath import is_square, is_prime, gcd
     from math import floor, sqrt
@@ -20,10 +20,13 @@ def shanks(n, k):
     if is_prime(n) or is_square(n):
         return False
 
+    # 2 main loops:
+    #  - Until you find q is a perfect square
+    #  - Until p equals previous p
+
     # Initializations for first loop
     p0 = floor(sqrt(k*n))
     q0 = 1
-
     q1 = k*n - p0*p0
 
     p = p0
@@ -40,7 +43,6 @@ def shanks(n, k):
         q_prev = save
 
         # print p, q_prev, b
-
         if is_square(q):
             break
 
@@ -60,13 +62,10 @@ def shanks(n, k):
     # Loop until p equals the previous p value
     while True:
         p_prev = p
-
         b = floor((p0 + p_prev) / q)
-
         p = b*q - p_prev
 
-        # print p, q, b
-
+        # print p, q, b=
         save = q
         q = q_prev + b*(p_prev - p)
         q_prev = save
@@ -81,4 +80,5 @@ def shanks(n, k):
         return int(f), int(n/f)
     else:
         print "Try different k value"
+        return False
 

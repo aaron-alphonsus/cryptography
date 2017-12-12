@@ -1,6 +1,10 @@
-# TODO: Moar doctest/unittests!
-# TODO: Different representation of message for more plaintext values?
+# With this one, I was in two minds whether to generate new primes each time or
+# to have doctests. In the end, I wanted to be consistent with providing
+# doctests in all my main functions, and used primes that were already genrated.
 
+# I tried to mock having separate private and public key files. You can see that
+# the encryption process only uses the public key file, and only the person
+# decrypting can use the private key file
 
 def decrypt(cipher):
     """

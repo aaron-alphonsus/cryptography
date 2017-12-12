@@ -1,6 +1,3 @@
-# TODO: Extend to actual character en/de-cryption?
-
-
 def encrypt(message, key, rounds=4):
     """
     Takes in a 12-bit message and splits it into two 6-bit messages left(0) and
@@ -46,7 +43,6 @@ def encrypt(message, key, rounds=4):
 
 
 def decrypt(ciphertext, key, rounds=4):
-    # TODO: Change this
     """
     Takes in a 12-bit ciphertext and splits it into two 6-bit ciphertexts
     left(0) and right(0).
@@ -87,7 +83,11 @@ def decrypt(ciphertext, key, rounds=4):
 
 def f(r, key):
     """
-    The f function takes in an r value
+    The f function is a large part of the DES and calls a lot of other functions
+    Takes in an r value and expands it.
+    Takes an XOR of the key and result, formatting the result to 8 bits
+    First 4 bits go to S1 and last 4 go to S2. They each return a 3-bit output
+    which is concatenated to form a 6-bit result.
 
     >>> f('100110', '01100101')
     '000100'

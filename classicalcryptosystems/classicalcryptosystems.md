@@ -27,7 +27,7 @@ Decryption is similar to encryption except we do a backwards shift.
 | (ciphertext) |  c  |  i  |  t  |  x  |  w  |  j  |  c  |  s  |  y  |  b  |  h  |  n  |  j  |  v  |  m  |  l  |
 
 ## Attack
-Finding key length and key
+[TODO] Finding key length and key
 
 ## References
  - Trappe, Wade, and Lawrence C. Washington. Introduction to Cryptography: with

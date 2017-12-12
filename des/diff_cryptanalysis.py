@@ -3,6 +3,10 @@ from simpdes import encrypt, expander, s1_box, s2_box
 
 def diff_cryptanalysis(message, message_star, key):
     """
+    Differential cryptanalysis is a chosen plaintext attack on the DES. By
+    comparing the differences in the produced ciphertext, we can deduce
+    information about the key used.
+
     >>> diff_cryptanalysis(['000111011011', '010111011011'], \
     ['101110011011', '101110011011'], '010011010')
     '001001101'
@@ -17,16 +21,22 @@ def diff_cryptanalysis(message, message_star, key):
     k4_l = ''
     k4_r = ''
     for i in range(2):
+        # Split the chosen plaintext into left and right
         left1, right1 = message[i][0:6], message[i][6:12]
 
+        # Run the message on the 3 round simpdes
         output = encrypt(message[i], key, 3)
         left4, right4 = output[0:6], output[6:12]
 
+        # This is the chosen plaintext pair
         left_star1, right_star1 = message_star[i][0:6], message_star[i][6:12]
 
+        # Run the pair through simpdes
         output_star = encrypt(message_star[i], key, 3)
         left_star4, right_star4 = output_star[0:6], output_star[6:12]
 
+        # The primes are calculated as the difference between the plaintext pair
+        # XOR yields the required result
         left_prime1 = "{0:06b}".format(int(left1, 2) ^ int(left_star1, 2))
         right_prime1 = "{0:06b}".format(int(right1, 2) ^ int(right_star1, 2))
         left_prime4 = "{0:06b}".format(int(left4, 2) ^ int(left_star4, 2))
@@ -34,12 +44,14 @@ def diff_cryptanalysis(message, message_star, key):
 
         e_left4 = expander(left4)
 
+        # Calculates the XOR input and output for the s-boxes
         e_left_prime4 = expander(left_prime4)
         s1_input, s2_input = e_left_prime4[:4], e_left_prime4[4:]
 
         sbox_output = "{0:06b}".format(int(right_prime4, 2) ^ int(left_prime1, 2))
         s1_output, s2_output = sbox_output[:3], sbox_output[3:]
 
+        # Find and append the s-box pairs that work
         p1 = []
         p2 = []
         for j in range(pow(2, 4)):

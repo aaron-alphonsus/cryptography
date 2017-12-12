@@ -42,6 +42,8 @@ def des(plaintext, key):
 
 def initial_permutation(m):
     """
+    The initial message is run through  a permutation function
+
     >>> initial_permutation('0000000100100011010001010110011110001001101010111100110111101111')
     ('11001100000000001100110011111111', '11110000101010101111000010101010')
 
@@ -62,6 +64,9 @@ def initial_permutation(m):
 
 def key_permutation(k):
     """
+    The key runs through a permutation which also serves to discard of the
+     parity bits.
+
     >>> key_permutation('0001001100110100010101110111100110011011101111001101111111110001')
     ('1111000011001100101010101111', '0101010101100110011110001111')
 
@@ -82,6 +87,9 @@ def key_permutation(k):
 
 def left_shift(c, d, i):
     """
+    Depending on which round, the left and right 28 bits of the key are shifted
+    to the left
+
     >>> left_shift('1111000011001100101010101111', '0101010101100110011110001111', 1)
     ('1110000110011001010101011111', '1010101011001100111100011110')
 
@@ -99,6 +107,9 @@ def left_shift(c, d, i):
 
 def cd_pick(c, d):
     """
+    This algorithm chooses 48 bits from the 56 bit string. This 48-bit key then
+    gets XORed with the permuted key
+
     >>> cd_pick('1110000110011001010101011111', '1010101011001100111100011110')
     '000110110000001011101111111111000111000001110010'
 
@@ -120,6 +131,11 @@ def cd_pick(c, d):
 
 def f(r, k):
     """
+    Once again, like in simpdes, f is one of the main, if not the main functions.
+    It takes in the right 32 bits of the message and the key
+    It calls the expansion function, produces the inputs for the s-boxes and
+    gets the outputs, finally calling a function to permute the returned string
+
     >>> f('11110000101010101111000010101010', '000110110000001011101111111111000111000001110010')
     '00100011010010101010100110111011'
 
@@ -141,6 +157,8 @@ def f(r, k):
 
 def expansion(r):
     """
+    Expands the r value to XOR with the 48 bit permuted key
+
     >>> expansion('11110000101010101111000010101010')
     '011110100001010101010101011110100001010101010101'
 
@@ -160,6 +178,8 @@ def expansion(r):
 
 def s_boxes(b):
     """
+    Takes in the inputs and indexes the S-boxes to produce the outputs
+
     >>> s_boxes(['011000', '010001', '011110', '111010', '100001', '100110', '010100', '100111'])
     ['0101', '1100', '1000', '0010', '1011', '0101', '1001', '0111']
 
@@ -209,6 +229,8 @@ def s_boxes(b):
     i = 0
     c = []
     for bits in b:
+        # Caluclate the row and column to reference the S-boxes and get the
+        # output
         row = int(bits[0]+bits[5], 2)
         col = int(bits[1:5], 2)
         c.append("{0:04b}".format(s[i][row][col]))
@@ -218,6 +240,8 @@ def s_boxes(b):
 
 def permute_string(c):
     """
+    Run the string received from the s-boxes in a permutation
+
     >>> permute_string('01011100100000101011010110010111')
     '00100011010010101010100110111011'
 
@@ -235,6 +259,9 @@ def permute_string(c):
 
 def inverse_ip(r16l16):
     """
+    Run the final left and right values (switched) on the inverse of the initial
+    permutation to get the ciphertext
+
     >>> inverse_ip('0000101001001100110110011001010101000011010000100011001000110100')
     '1000010111101000000100110101010000001111000010101011010000000101'
 

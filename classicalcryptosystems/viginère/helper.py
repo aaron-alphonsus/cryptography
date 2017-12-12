@@ -8,7 +8,7 @@ def frequency(text):
     """
     import collections
     freq = collections.Counter(text)
-    print freq
+    # print freq
     return freq
 
 # frequency("viginere")

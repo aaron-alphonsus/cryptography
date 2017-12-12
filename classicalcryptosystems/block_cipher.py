@@ -49,24 +49,31 @@ def block_cipher(text, switch):
          [11, 9, 8]]
     m_inv = inv_matrix_mod(m, 26)
 
+    # encrypt or decrypt depending on the key
     if switch:
         key = m_inv
     else:
         key = m
 
+    # Figure out how many times we need to run the algorithm
     length = len(text)
     rounds = length/3
 
+    # Append the plaintext with 'x's otherwise we will not be able to do matrix
+    # multiplication
     if length % 3:
         rounds += 1
         text += 'x' * (3 - length % 3)
 
+
     c_text = ''
     for i in range(rounds):
+        # Create the vector for matrix multiplication
         vector = []
         for letter in text[3 * i: 3 * (i + 1)]:
             vector.append(ord(letter) - ord('a'))
 
+        # Convert the ciphertext from its number representation to characters
         c = np.dot(vector, key) % 26
         for num in c:
             c_text += (chr(num + ord('a')))
