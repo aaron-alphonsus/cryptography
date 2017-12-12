@@ -48,11 +48,11 @@ solve for A and B
 
 ### Example
 
-Plaintext = if, Corresponding Ciphertext = pq
-i.e. 8 maps to 15 and 5 maps to 16
+Plaintext = if, Corresponding Ciphertext = pq  
+i.e. 8 maps to 15 and 5 maps to 16  
 
-Therefore we have the equations: 8A + B = 15 and 5A + B = 16 (mod 26)
-Subtracting yields: 3A = -1 (mod 26) = 25.
+Therefore we have the equations: 8A + B = 15 and 5A + B = 16 (mod 26)  
+Subtracting yields: 3A = -1 (mod 26) = 25.  
 Therefore A = 17. Using this we can solve for B and find B = 9
 
 
